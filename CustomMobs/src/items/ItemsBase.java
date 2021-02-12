@@ -86,6 +86,7 @@ public class ItemsBase extends ItemStack{
 			
 			this.setItemMeta(meta);
 			this.setType(this.getItemMaterial());
+			
 			//meta.setLore(this.getLore());
 			//this.setItemMeta(meta);
 			this.getEnchantments().clear();

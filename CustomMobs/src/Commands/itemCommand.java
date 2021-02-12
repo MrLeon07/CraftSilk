@@ -19,9 +19,15 @@ public class itemCommand implements CommandExecutor{
 				Player senderPlayer = (Player) sender;
 				CustomSword sword = new CustomSword();	
 				senderPlayer.sendMessage(command);
-				System.out.println(sword.getClass());
+
+
 				senderPlayer.getWorld().dropItem(senderPlayer.getLocation(), sword);
-				senderPlayer.sendMessage("Ýtem düþürüldü... "+ sword.getItemName());
+				try {
+				senderPlayer.sendMessage("Ýtem düþürüldü... "+ sword.getItemName());}
+				catch(Exception e ) {
+					System.out.println("item oluþturulamadý. ");
+					System.out.println(sword.getType());
+				}
 			}
 		}
 		return false;
