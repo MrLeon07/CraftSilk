@@ -1,0 +1,12 @@
+main: main.Main
+name: customMobs
+version: 1.0
+api-version: 1.16
+author: Leon
+commands:
+   cmonster:
+      description: Yeni bir yaratik olusturur
+   item:
+      description: Klasik kilic verir
+   simya:
+      description: Simya penceresini acar
