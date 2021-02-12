@@ -5,6 +5,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import items.Detector;
+import items.ItemsBase;
 
 public class Alchemy {
 	public void StartAlchemy(Inventory inv,ItemStack item) {
@@ -18,8 +19,8 @@ public class Alchemy {
 			System.out.println("Weapon = "+weapon);
 			Detector detItem = new Detector(item);
 			
-				if(detItem.Detect()) {
-					
+				if(detItem.isCustomItem()) {
+					ItemsBase itembased = detItem.getItem();
 				if(another.getType() == Material.NETHERITE_INGOT) {
 					inv.setItem(11, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(12, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
@@ -29,8 +30,8 @@ public class Alchemy {
 					inv.setItem(22, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					
 					inv.setItem(31, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					detItem.incrasePlus();
-					inv.setItem(resultSlot, detItem);
+					itembased.incrasePlus();
+					inv.setItem(resultSlot, itembased);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(Material.AIR,1));
 				
