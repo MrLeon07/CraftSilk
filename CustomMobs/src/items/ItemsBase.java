@@ -8,6 +8,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+
 public class ItemsBase extends ItemStack{
 	
 	private int itemPlus = 0;//Ýtemin + derecesini gösterir. + derecesi attrýkça damageall enchant seviyesi artar
@@ -76,8 +77,9 @@ public class ItemsBase extends ItemStack{
 		
 		if(this.getItemMaterial()!= null) {
 			this.setAmount(1);
+			ItemStack stackedItem = new ItemStack(this.getItemMaterial(),1);//Kopyalamak için örnek eþya oluþturdum
 			
-			ItemMeta meta = this.getItemMeta();
+			ItemMeta meta =stackedItem.getItemMeta();
 			meta.setLore(Arrays.asList(
 					"Güçlendirme seviyesi: "+this.getItemPlus(),"",
 					"Item sýralamasý: "+this.getItemStageName(),""
