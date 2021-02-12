@@ -7,7 +7,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Detector {
 	private final ItemsBase item = new ItemsBase();
-	private ItemStack stacked;
+
 	private boolean hasId = false;
 	private boolean hasPlus = false;
 	private boolean hasStageName = false;
