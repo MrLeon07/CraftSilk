@@ -12,17 +12,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ItemsBase extends ItemStack{
 	
 	private int itemPlus = 0;//Ýtemin + derecesini gösterir. + derecesi attrýkça damageall enchant seviyesi artar
-	
 	private String ItemName = "Customsword";//Eþyanýn temel adý
-	
 	private Material ItemMaterial = Material.WOODEN_SWORD;// itemin materiali. Varsayýlan olarak wood
-
 	private Map<Enchantment,Integer> Enchant = this.getEnchantments();// Varsayýlaný zaten var olan enchler
 	private int id = 1;// eþyanýn idsi varsayýlan 1 yani 1. seviye kýlýç
 	private String ItemStageName = "Sýradan"; // Ýtem düzeyi item idsi ile deðiþecek þekilde ayarlanacak
 	private String ItemDesc = "Gerçek savaþçýnýn ilk kýlýcý"; // Hawalý bir açýklama :D
 	private int itemStageLevel = 1; // Stage level plus ile toplanýr ve enchant seviyesini attýrýr
+	//-------------------------------------- ÖRNEK METÝNLER ----------------
+		//Bunlar detectorde kullanýlýyor kolaylýk olsun diye buraya ekledim. Uzunluk vs. alýyorum. ayrýca update methodunda da yer alýyorlar.
+	public final String guclendirme = "Güçlendirme seviyesi: ";
+	public final String sýralama = "Item sýralamasý: ";
+	public final String kod ="Item id: ";
 	//----------------------------Getter,Setter--------------------------------
+
 	public String getItemDesc() {
 		return ItemDesc;
 	}
@@ -77,17 +80,16 @@ public class ItemsBase extends ItemStack{
 		
 		if(this.getItemMaterial()!= null) {
 			this.setAmount(1);
-			ItemStack stackedItem = new ItemStack(this.getItemMaterial(),1);//Kopyalamak için örnek eþya oluþturdum
-			
-			ItemMeta meta =stackedItem.getItemMeta();
+			this.setType(this.getItemMaterial());//Öncelikle material tipi belirle ardýndan metadata al yoksa hata verir
+			ItemMeta meta =this.getItemMeta();
 			meta.setLore(Arrays.asList(
-					"Güçlendirme seviyesi: "+this.getItemPlus(),"",
-					"Item sýralamasý: "+this.getItemStageName(),""
-					,"","",this.getItemDesc(),"Item id: "+this.getId()));
+					this.guclendirme+this.getItemPlus(),"",
+					this.sýralama+this.getItemStageName(),""
+					,"","",this.getItemDesc(),this.kod+this.getId()));
 			meta.setDisplayName(getItemName());
 			
-			this.setItemMeta(meta);
-			this.setType(this.getItemMaterial());
+			this.setItemMeta(meta); //Metayý iteme aktarýyor
+			
 			
 			//meta.setLore(this.getLore());
 			//this.setItemMeta(meta);
