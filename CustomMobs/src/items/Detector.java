@@ -36,6 +36,7 @@ public class Detector {
 		ItemMeta meta1 = item.getItemMeta();
 		this.item.setItemMeta(meta1);
 		this.item.setItemMaterial(item.getType());
+		this.item.update();
 		
 		}
 		
