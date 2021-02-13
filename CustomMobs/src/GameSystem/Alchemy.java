@@ -30,8 +30,8 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(22, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					
 					inv.setItem(31, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					this.incrasePlus(itembased);
-					inv.setItem(resultSlot, itembased);
+					ItemsBase newItem = this.incrasePlus(itembased);
+					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(Material.AIR,1));
 				
