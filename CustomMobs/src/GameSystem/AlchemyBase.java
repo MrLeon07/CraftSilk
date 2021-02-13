@@ -24,32 +24,24 @@ public class AlchemyBase {
 		return item;
 	}
 	public ItemsBase incrasePlus(ItemsBase item) {
-		item.setItemPlus(item.getItemPlus()+1);
+		
 		//this.Enchant.remove(Enchantment.DAMAGE_ALL);
-		System.out.println(item);
-		int enchantlevel = item.getItemPlus()+item.getItemStageLevel();
-		item.removeEnchantment(Enchantment.DAMAGE_ALL);
-		item.addEnchantment(Enchantment.DAMAGE_ALL, enchantlevel);
-		item.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 2);
-		item.update();
-		/*Map<Enchantment,Integer> Ench = new HashMap<Enchantment,Integer>();
-		Ench.putAll(item.getEnch());
-		Ench.put(Enchantment.DAMAGE_ALL, enchantlevel);
-		ItemsBase newBased  = new ItemsBase();
-		newBased.setItemStageLevel(item.getItemStageLevel());
-		newBased.setId(item.getId());
-		newBased.setItemDesc(item.getItemDesc());
-		newBased.setType(item.getType());
+	
+		if(item.getItemPlus()<=10 && item.getItemStageLevel()<=3) {
+			item.removeEnchantment(Enchantment.DAMAGE_ALL);
+			item.removeEnchantment(Enchantment.DAMAGE_UNDEAD);
+			item.removeEnchantment(Enchantment.LOOT_BONUS_MOBS);
+			
+			item.setItemPlus(item.getItemPlus()+1);
+		if(item.getEnchantments().get(Enchantment.DAMAGE_ALL)>5 || item.getItemPlus()>5)
+			item.addEnchantment(Enchantment.DAMAGE_UNDEAD, item.getItemPlus()-5);
+		else {
+			item.addEnchantment(Enchantment.DAMAGE_ALL, item.getItemPlus());
+		}
 		
-		newBased.setItemMaterial(item.getType());
-		newBased.setItemMeta(item.getItemMeta());
-		newBased.setItemName(item.getItemName());
-		newBased.setItemPlus(0);
-		newBased.setItemStageName(item.getItemStageName());
-		newBased.setAmount(1);
-		
-		newBased.setEnchantments(Ench);// stagelevel+enchant level kadar damageall verir
-		newBased.update();*/
+		item.addEnchantment(Enchantment.LOOT_BONUS_MOBS, item.getItemStageLevel());
+		item.update();}
+
 		return item;
 	
 		
