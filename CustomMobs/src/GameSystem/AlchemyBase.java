@@ -30,6 +30,7 @@ public class AlchemyBase {
 		int enchantlevel = item.getItemPlus()+item.getItemStageLevel();
 		item.removeEnchantment(Enchantment.DAMAGE_ALL);
 		item.addEnchantment(Enchantment.DAMAGE_ALL, enchantlevel);
+		item.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 2);
 		item.update();
 		/*Map<Enchantment,Integer> Ench = new HashMap<Enchantment,Integer>();
 		Ench.putAll(item.getEnch());
