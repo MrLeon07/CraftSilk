@@ -1,5 +1,6 @@
 package GameSystem;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.enchantments.Enchantment;
@@ -26,13 +27,14 @@ public class AlchemyBase {
 		item.setItemPlus(item.getItemPlus()+1);
 		//this.Enchant.remove(Enchantment.DAMAGE_ALL);
 		int enchantlevel = item.getItemPlus()+item.getItemStageLevel();
-		Map<Enchantment,Integer> Ench = item.getEnch();
+		Map<Enchantment,Integer> Ench = new HashMap<Enchantment,Integer>();
 		Ench.putAll(item.getEnch());
-		Ench.replace(Enchantment.DAMAGE_ALL, enchantlevel);
+		Ench.put(Enchantment.DAMAGE_ALL, enchantlevel);
 		ItemsBase newBased  = new ItemsBase();
 		newBased.setItemStageLevel(item.getItemStageLevel());
 		newBased.setId(item.getId());
 		newBased.setItemDesc(item.getItemDesc());
+		newBased.setType(item.getType());
 		newBased.setItemMaterial(item.getType());
 		newBased.setItemMeta(item.getItemMeta());
 		newBased.setItemName(item.getItemName());
