@@ -30,9 +30,10 @@ public class AlchemyBase {
 		if(item.getItemPlus()<=10 && item.getItemStageLevel()<=3) {
 			item.removeEnchantment(Enchantment.DAMAGE_ALL);
 			item.removeEnchantment(Enchantment.DAMAGE_UNDEAD);
-			item.removeEnchantment(Enchantment.LOOT_BONUS_MOBS);
-			
+			item.removeEnchantment(Enchantment.LOOT_BONUS_MOBS);			
 			item.setItemPlus(item.getItemPlus()+1);
+			
+			
 		if(item.getEnchantments().get(Enchantment.DAMAGE_ALL)>5 || item.getItemPlus()>5)
 			item.addEnchantment(Enchantment.DAMAGE_UNDEAD, item.getItemPlus()-5);
 		else {
