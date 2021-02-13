@@ -93,7 +93,6 @@ public class ItemsBase extends ItemStack{
 			
 			//meta.setLore(this.getLore());
 			//this.setItemMeta(meta);
-			this.removeEnchantment(Enchantment.DAMAGE_ALL);
 			this.addEnchantments(this.Enchant);
 			
 		}}
