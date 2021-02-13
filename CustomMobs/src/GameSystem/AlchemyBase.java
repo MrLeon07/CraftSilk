@@ -19,6 +19,8 @@ public class AlchemyBase {
 		newBased.setAmount(1);
 		newBased.update();*/
 		item.removeEnchantment(Enchantment.DAMAGE_ALL);
+		item.setItemPlus(0);
+		item.update();
 		return item;
 	}
 	public ItemsBase incrasePlus(ItemsBase item) {
@@ -28,6 +30,7 @@ public class AlchemyBase {
 		int enchantlevel = item.getItemPlus()+item.getItemStageLevel();
 		item.removeEnchantment(Enchantment.DAMAGE_ALL);
 		item.addEnchantment(Enchantment.DAMAGE_ALL, enchantlevel);
+		item.update();
 		/*Map<Enchantment,Integer> Ench = new HashMap<Enchantment,Integer>();
 		Ench.putAll(item.getEnch());
 		Ench.put(Enchantment.DAMAGE_ALL, enchantlevel);
