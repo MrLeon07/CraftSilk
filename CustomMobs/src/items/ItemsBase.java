@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class ItemsBase extends ItemStack{
-	
+
 	private int itemPlus = 0;//Ýtemin + derecesini gösterir. + derecesi attrýkça damageall enchant seviyesi artar
 	private String ItemName = "Customsword";//Eþyanýn temel adý
 	private Material ItemMaterial = Material.WOODEN_SWORD;// itemin materiali. Varsayýlan olarak wood
@@ -25,7 +25,6 @@ public class ItemsBase extends ItemStack{
 	public final String sýralama = "Item sýralamasý: ";
 	public final String kod ="Item id: ";
 	//----------------------------Getter,Setter--------------------------------
-
 	public String getItemDesc() {
 		return ItemDesc;
 	}
@@ -106,6 +105,7 @@ public class ItemsBase extends ItemStack{
 	//--------------------------------Plus--------------------------
 	//Ýmmutable maps ile ilgili sorun var enchantlarý düzelt sonrasýnda + basma sistemi tamamdýr. 
 	// ardýndan item yükseltme sistemine geç ya da + basma itemi iþine gir
+
 	
 	//Her iþlemden sonra update at ki iþlemler eþyaya geçsin.
 
