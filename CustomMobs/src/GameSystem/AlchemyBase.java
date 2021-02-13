@@ -18,15 +18,16 @@ public class AlchemyBase {
 		newBased.setItemStageName(item.getItemStageName());
 		newBased.setAmount(1);
 		newBased.update();*/
-		item.removeEnchantment(Enchantment.DAMAGE_ALL);
+		item.removeEnchantment(Enchantment.DAMAGE_ARTHROPODS);
 		return item;
 	}
 	public ItemsBase incrasePlus(ItemsBase item) {
 		item.setItemPlus(item.getItemPlus()+1);
 		//this.Enchant.remove(Enchantment.DAMAGE_ALL);
-		int enchantlevel = item.getItemPlus()+item.getItemStageLevel();
-		item.removeEnchantment(Enchantment.DAMAGE_ALL);
-		item.addEnchantment(Enchantment.DAMAGE_ALL, enchantlevel);
+		System.out.println(item);
+		//int enchantlevel = item.getItemPlus()+item.getItemStageLevel();
+		//item.removeEnchantment(Enchantment.DAMAGE_ARTHROPODS);
+		//item.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, enchantlevel);
 		/*Map<Enchantment,Integer> Ench = new HashMap<Enchantment,Integer>();
 		Ench.putAll(item.getEnch());
 		Ench.put(Enchantment.DAMAGE_ALL, enchantlevel);
