@@ -107,18 +107,7 @@ public class ItemsBase extends ItemStack{
 	//--------------------------------Plus--------------------------
 	//Ýmmutable maps ile ilgili sorun var enchantlarý düzelt sonrasýnda + basma sistemi tamamdýr. 
 	// ardýndan item yükseltme sistemine geç ya da + basma itemi iþine gir
-	public void resetPlus() {
-		this.setItemPlus(0);
-		this.Enchant.remove(Enchantment.DAMAGE_ALL);
-		this.update();
-	}
-	public void incrasePlus() {
-		this.setItemPlus(this.getItemPlus()+1);
-		//this.Enchant.remove(Enchantment.DAMAGE_ALL);
-		int enchantlevel = this.getItemPlus()+this.getItemStageLevel();
-		this.Enchant.put(Enchantment.DAMAGE_ALL,enchantlevel);// stagelevel+enchant level kadar damageall verir
-		this.update();
-	}
+	
 	//Her iþlemden sonra update at ki iþlemler eþyaya geçsin.
 
 }

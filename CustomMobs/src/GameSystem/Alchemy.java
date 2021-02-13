@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import items.Detector;
 import items.ItemsBase;
 
-public class Alchemy {
+public class Alchemy extends AlchemyBase{
 	public void StartAlchemy(Inventory inv,ItemStack item) {
 		if(inv.getSize() == 9*6) {
 		int weaponSlot = 10;
@@ -30,7 +30,7 @@ public class Alchemy {
 					inv.setItem(22, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					
 					inv.setItem(31, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					itembased.incrasePlus();
+					this.incrasePlus(itembased);
 					inv.setItem(resultSlot, itembased);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(Material.AIR,1));
