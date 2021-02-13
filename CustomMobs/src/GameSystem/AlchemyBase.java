@@ -35,6 +35,7 @@ public class AlchemyBase {
 		newBased.setId(item.getId());
 		newBased.setItemDesc(item.getItemDesc());
 		newBased.setType(item.getType());
+		newBased.update();
 		newBased.setItemMaterial(item.getType());
 		newBased.setItemMeta(item.getItemMeta());
 		newBased.setItemName(item.getItemName());
