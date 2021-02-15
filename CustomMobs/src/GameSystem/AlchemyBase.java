@@ -28,18 +28,19 @@ public class AlchemyBase {
 		//this.Enchant.remove(Enchantment.DAMAGE_ALL);
 	
 		if(item.getItemPlus()<=10 && item.getItemStageLevel()<=3) {
-			item.removeEnchantment(Enchantment.DAMAGE_ALL);
-			item.removeEnchantment(Enchantment.DAMAGE_UNDEAD);
-			item.removeEnchantment(Enchantment.LOOT_BONUS_MOBS);			
+		
+
 			item.setItemPlus(item.getItemPlus()+1);
 			
 			
-		if(item.getEnchantments().get(Enchantment.DAMAGE_ALL)>5 || item.getItemPlus()>5)
-			item.addEnchantment(Enchantment.DAMAGE_UNDEAD, item.getItemPlus()-5);
+		if(item.getItemPlus()>5) {
+			item.removeEnchantment(Enchantment.DAMAGE_UNDEAD);
+			item.addEnchantment(Enchantment.DAMAGE_UNDEAD, item.getItemPlus()-5);}
 		else {
+			item.removeEnchantment(Enchantment.DAMAGE_ALL);
 			item.addEnchantment(Enchantment.DAMAGE_ALL, item.getItemPlus());
 		}
-		
+		item.removeEnchantment(Enchantment.LOOT_BONUS_MOBS);			
 		item.addEnchantment(Enchantment.LOOT_BONUS_MOBS, item.getItemStageLevel());
 		item.update();}
 
