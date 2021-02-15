@@ -27,7 +27,7 @@ public class AlchemyBase {
 		
 		//this.Enchant.remove(Enchantment.DAMAGE_ALL);
 	
-		if(item.getItemPlus()<=10 && item.getItemStageLevel()<=3) {
+		if(item.getItemPlus()<10 && item.getItemStageLevel()<=3) {
 		
 
 			item.setItemPlus(item.getItemPlus()+1);
