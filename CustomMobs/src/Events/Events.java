@@ -30,9 +30,8 @@ public class Events implements Listener{
 			if(item.getType() == Material.GREEN_DYE) {
 				player.sendMessage("Simya basladý");
 				Alchemy alc = new Alchemy();
-				System.out.println("inv= "+inv);
-				System.out.println("player= "+player);
-				alc.StartAlchemy(inv,inv.getItem(10));
+
+				alc.StartAlchemy(inv,player,inv.getItem(10));
 				e.setCancelled(true);
 				//asdasdasd}
 				

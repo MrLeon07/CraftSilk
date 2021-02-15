@@ -1,6 +1,7 @@
 package GameSystem;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -8,7 +9,7 @@ import items.Detector;
 import items.ItemsBase;
 
 public class Alchemy extends AlchemyBase{
-	public void StartAlchemy(Inventory inv,ItemStack item) {
+	public void StartAlchemy(Inventory inv,Player player,ItemStack item) {
 		if(inv.getSize() == 9*6) {
 		int weaponSlot = 10;
 		int anotherslot = 16;
@@ -16,7 +17,7 @@ public class Alchemy extends AlchemyBase{
 		ItemStack weapon =item;
 		ItemStack another = inv.getItem(anotherslot);
 		if(weapon != null && another != null && weapon.getType() != Material.AIR && another.getType() != Material.AIR) {
-			System.out.println("Weapon = "+weapon);
+			
 			Detector detItem = new Detector(item);
 			
 				if(detItem.isCustomItem()) {
@@ -34,8 +35,13 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(Material.AIR,1));
+					
 				
 			}}
+				else {
+					player.sendMessage("<SimyaSistemi>: Bu eþyayý güçlendiremezsin");
+					
+				}
 			
 		}
 		
