@@ -42,7 +42,11 @@ public class AlchemyBase {
 		}
 		item.removeEnchantment(Enchantment.LOOT_BONUS_MOBS);			
 		item.addEnchantment(Enchantment.LOOT_BONUS_MOBS, item.getItemStageLevel());
-		}item.update();
+		}
+		else{item.removeEnchantment(Enchantment.DAMAGE_UNDEAD);
+			item.removeEnchantment(Enchantment.DAMAGE_ALL);
+			item.addEnchantment(Enchantment.DAMAGE_ALL, item.getItemPlus());
+			item.addEnchantment(Enchantment.DAMAGE_UNDEAD, item.getItemPlus()-5);}item.update();
 		
 
 		return item;

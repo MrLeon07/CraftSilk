@@ -34,7 +34,7 @@ public class Alchemy extends AlchemyBase{
 					ItemsBase newItem = this.incrasePlus(itembased);
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
-					inv.setItem(anotherslot, new ItemStack(Material.AIR,1));
+					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));
 					
 				
 			}}
