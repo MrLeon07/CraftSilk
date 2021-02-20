@@ -22,7 +22,7 @@ public class Alchemy extends AlchemyBase{
 			
 				if(detItem.isCustomItem()) {
 					ItemsBase itembased = detItem.getItem();
-				if(another.getType() == Material.NETHERITE_INGOT) {
+				if(another.getType() == Material.GLOWSTONE_DUST) {
 					inv.setItem(11, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(12, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(13, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
@@ -34,10 +34,21 @@ public class Alchemy extends AlchemyBase{
 					ItemsBase newItem = this.incrasePlus(itembased);
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
-					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));
+					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
+				else if(another.getType() == Material.REDSTONE || another.getType() == Material.SUGAR || another.getType() == Material.GUNPOWDER) {
+					inv.setItem(11, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
+					inv.setItem(12, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
+					inv.setItem(13, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
+					inv.setItem(14, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
+					inv.setItem(15, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
+					inv.setItem(22, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					
-				
-			}}
+					inv.setItem(31, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
+					ItemsBase newItem = this.addBlue(another,itembased);
+					inv.setItem(resultSlot, newItem);
+					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
+					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
+				}
 				else {
 					player.sendMessage("<SimyaSistemi>: Bu eþyayý güçlendiremezsin");
 					
