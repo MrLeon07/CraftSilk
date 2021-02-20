@@ -1,5 +1,6 @@
 package GameSystem;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
@@ -57,44 +58,45 @@ public class AlchemyBase {
 		
 	}
 	public ItemsBase addBlue(ItemStack Stone,ItemsBase item) {
-		
-		switch(Stone.getType()){
-		case GUNPOWDER:
+		///////BURAYI DÜZELT BOZUK BURASI ////////////////////////
+		if(Stone.getType() == Material.GUNPOWDER) {
 			try {
 				if(item.getEnch().containsKey(Enchantment.KNOCKBACK)) {
 					int enchLevel = item.getEnchantmentLevel(Enchantment.KNOCKBACK);
 					enchLevel++;
-					item.removeEnchantment(Enchantment.KNOCKBACK);
+					
 					item.addEnchantment(Enchantment.KNOCKBACK, enchLevel);}
 				else {item.addEnchantment(Enchantment.KNOCKBACK, 1);}
 				
-			} catch (Exception e) {};
-		case SUGAR:
+			} catch (Exception e) {System.out.println("savurma eklenemedi");}
+			
+		}
+		if(Stone.getType() == Material.SUGAR) {
 			try {
 				if(item.getEnch().containsKey(Enchantment.SWEEPING_EDGE)) {
 					int enchLevel = item.getEnchantmentLevel(Enchantment.SWEEPING_EDGE);
 					enchLevel++;
-					item.removeEnchantment(Enchantment.SWEEPING_EDGE);
+					
 					item.addEnchantment(Enchantment.SWEEPING_EDGE, enchLevel);}
 				else {item.addEnchantment(Enchantment.SWEEPING_EDGE, 1);}
 				
-			} catch (Exception e) {};
-		case REDSTONE:
+			} catch (Exception e) {System.out.println("süpürücü kenar eklenemedi");}
+		}
+		if(Stone.getType() == Material.REDSTONE) {
 			try {
 				if(item.getEnch().containsKey(Enchantment.FIRE_ASPECT)) {
 					int enchLevel = item.getEnchantmentLevel(Enchantment.FIRE_ASPECT);
 					enchLevel++;
-					item.removeEnchantment(Enchantment.FIRE_ASPECT);
+					
 					item.addEnchantment(Enchantment.FIRE_ASPECT, enchLevel);}
 				else {item.addEnchantment(Enchantment.FIRE_ASPECT, 1);}
 				
-			} catch (Exception e) {};
-		default:
-			break;
-			
-		
-		
+			} catch (Exception e) {System.out.println("Fire aspect eklenemedi");}
 		}
+				
+		item.update();
+		
+		
 		return item;
 		
 	}
