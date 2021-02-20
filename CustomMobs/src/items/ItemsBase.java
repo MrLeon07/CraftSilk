@@ -83,7 +83,7 @@ public class ItemsBase extends ItemStack{
 			ItemMeta meta =this.getItemMeta();
 			meta.setLore(Arrays.asList(
 					this.guclendirme+this.getItemPlus(),"",
-					this.sýralama+this.getItemStageName(),""
+					this.sýralama+this.getItemStageName().trim(),""
 					,"","",this.getItemDesc(),this.kod+this.getId()));
 			meta.setDisplayName(getItemName());
 			
@@ -92,7 +92,7 @@ public class ItemsBase extends ItemStack{
 			
 			//meta.setLore(this.getLore());
 			//this.setItemMeta(meta);
-			this.addEnchantments(this.Enchant);
+			//this.addEnchantments(this.Enchant);
 			
 		}}
 		catch(Exception e){
