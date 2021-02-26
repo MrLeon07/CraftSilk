@@ -1,5 +1,6 @@
 package Commands;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,9 +21,9 @@ public class itemCommand implements CommandExecutor{
 				Player senderPlayer = (Player) sender;
 				senderPlayer.sendMessage(command);
 				Attributes att = new Attributes();
-			
-
-				senderPlayer.getWorld().dropItem(senderPlayer.getLocation(),att.gen());
+				ItemStack item = new ItemStack(Material.DIAMOND_SWORD,1);
+				senderPlayer.getInventory().addItem(att.gen(item));
+				//senderPlayer.getWorld().dropItem(senderPlayer.getLocation(),att.gen());
 				try {
 				senderPlayer.sendMessage("Ýtem düþürüldü... ");}
 				catch(Exception e ) {
