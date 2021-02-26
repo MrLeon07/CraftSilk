@@ -1,5 +1,6 @@
 package items;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -55,7 +56,17 @@ public class Detector {
 	public ItemsBase getItem() {
 		return this.item;
 	}
-	
+	public CustomSword getSword() {
+		CustomSword sw = (CustomSword)this.item;
+		if(this.item.getType() == Material.WOODEN_SWORD) {sw.setCustomDamage(4);}
+		else if(this.item.getType() == Material.STONE_SWORD) {sw.setCustomDamage(5);}
+		else if(this.item.getType() == Material.GOLDEN_SWORD) {sw.setCustomDamage(4);}
+		else if(this.item.getType() == Material.IRON_SWORD) {sw.setCustomDamage(6);}
+		else if(this.item.getType() == Material.DIAMOND_SWORD) {sw.setCustomDamage(7);}
+		else if(this.item.getType() == Material.NETHERITE_SWORD) {sw.setCustomDamage(8);}
+		
+		return sw;
+	}
 
 
 

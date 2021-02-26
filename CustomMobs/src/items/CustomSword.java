@@ -4,6 +4,7 @@ import org.bukkit.Material;
 
 
 public class CustomSword extends ItemsBase{
+	private int customDamage = 4;
 	@SuppressWarnings("deprecation")
 	public CustomSword() {
 
@@ -15,6 +16,12 @@ public class CustomSword extends ItemsBase{
 		
 		
 		
+	}
+	public int getCustomDamage() {
+		return customDamage;
+	}
+	public void setCustomDamage(int customDamage) {
+		this.customDamage = customDamage;
 	}
 
 }

@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class ItemsBase extends ItemStack{
-
+	
 	private int itemPlus = 0;//Ýtemin + derecesini gösterir. + derecesi attrýkça damageall enchant seviyesi artar
 	private String ItemName = "Customsword";//Eþyanýn temel adý
 	private Material ItemMaterial = Material.WOODEN_SWORD;// itemin materiali. Varsayýlan olarak wood

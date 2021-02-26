@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import items.CustomSword;
 import items.Detector;
-import items.ItemsBase;
 
 public class Alchemy extends AlchemyBase{
 	public void StartAlchemy(Inventory inv,Player player,ItemStack item) {
@@ -21,7 +21,7 @@ public class Alchemy extends AlchemyBase{
 			Detector detItem = new Detector(item);
 			
 				if(detItem.isCustomItem()) {
-					ItemsBase itembased = detItem.getItem();
+					CustomSword itembased = detItem.getSword();
 				if(another.getType() == Material.GLOWSTONE_DUST) {
 					inv.setItem(11, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(12, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
@@ -30,7 +30,7 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(15, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(22, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));					
 					inv.setItem(31, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					ItemStack newItem = this.incrasePlus(itembased);
+					ItemStack newItem = this.incrasePlus(itembased);//itemsBase ver
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
@@ -42,7 +42,7 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(15, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(22, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(31, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
-					ItemStack newItem = this.addBlue(another,item);
+					ItemStack newItem = this.addBlue(another,item);//itemstack ver
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
