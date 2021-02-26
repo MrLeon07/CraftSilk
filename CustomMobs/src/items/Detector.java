@@ -39,6 +39,8 @@ public class Detector {
 		this.item.update();
 		
 		}
+		this.item.addEnchantments(item.getEnchantments());
+		
 		
 
 	}

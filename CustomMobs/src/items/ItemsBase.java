@@ -76,6 +76,8 @@ public class ItemsBase extends ItemStack{
 	//----------------------------Update----------------------------------
 	public final void update() {
 		try {		
+			
+			
 		
 		if(this.getItemMaterial()!= null) {
 			this.setAmount(1);

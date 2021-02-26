@@ -28,10 +28,9 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(13, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(14, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(15, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					inv.setItem(22, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					
+					inv.setItem(22, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));					
 					inv.setItem(31, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					ItemsBase newItem = this.incrasePlus(itembased);
+					ItemStack newItem = this.incrasePlus(itembased);
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
@@ -42,9 +41,8 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(14, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(15, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(22, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
-					
 					inv.setItem(31, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
-					ItemsBase newItem = this.addBlue(another,itembased);
+					ItemStack newItem = this.addBlue(another,item);
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}

@@ -1,5 +1,6 @@
 package GameSystem;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
@@ -38,10 +39,12 @@ public class AlchemyBase {
 		return item;
 		
 	}
-	public ItemsBase incrasePlus(ItemsBase item) {
+	public ItemStack incrasePlus(ItemsBase item) {
+		System.out.println(item.getEnchantments());
 		item.setItemPlus(item.getItemPlus()+1);
 		int itemPlus = item.getItemPlus();
 		int itemStageLevel = item.getItemStageLevel();
+		item.update();
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = nmsStack.getOrCreateTag();
 		NBTTagList modifiers = new NBTTagList();
@@ -59,54 +62,45 @@ public class AlchemyBase {
 		tag.set("AttributeModifiers", modifiers);
 		nmsStack.setTag(tag);
 		ItemStack new_item = CraftItemStack.asBukkitCopy(nmsStack);
-		Detector det = new Detector(new_item);
-		item = det.getItem();
-		item.update();
-		return item;
+		System.out.println(item.getEnchantments());
+		new_item.addEnchantments(item.getEnchantments());
+		Bukkit.broadcastMessage(item.getEnchantments().toString());
+		return new_item;
 	}
 		
 	
-	public ItemsBase addBlue(ItemStack Stone,ItemsBase item) {
-		///////BURAYI DÜZELT BOZUK BURASI ////////////////////////
+	public ItemStack addBlue(ItemStack Stone,ItemStack item) {
+		
+		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		NBTTagCompound tag = nmsStack.getTag();
 		if(Stone.getType() == Material.GUNPOWDER) {
 			try {
-				if(item.getEnch().containsKey(Enchantment.KNOCKBACK)) {
-					int enchLevel = item.getEnchantmentLevel(Enchantment.KNOCKBACK);
-					enchLevel++;
-					
-					item.addEnchantment(Enchantment.KNOCKBACK, enchLevel);}
-				else {item.addEnchantment(Enchantment.KNOCKBACK, 1);}
+				item.addEnchantment(Enchantment.KNOCKBACK,item.getEnchantmentLevel(Enchantment.KNOCKBACK)+1);
+				
 				
 			} catch (Exception e) {System.out.println("savurma eklenemedi");}
 			
 		}
 		if(Stone.getType() == Material.SUGAR) {
 			try {
-				if(item.getEnch().containsKey(Enchantment.SWEEPING_EDGE)) {
-					int enchLevel = item.getEnchantmentLevel(Enchantment.SWEEPING_EDGE);
-					enchLevel++;
-					
-					item.addEnchantment(Enchantment.SWEEPING_EDGE, enchLevel);}
-				else {item.addEnchantment(Enchantment.SWEEPING_EDGE, 1);}
+				item.addEnchantment(Enchantment.SWEEPING_EDGE,item.getEnchantmentLevel(Enchantment.SWEEPING_EDGE)+1);
 				
 			} catch (Exception e) {System.out.println("süpürücü kenar eklenemedi");}
 		}
 		if(Stone.getType() == Material.REDSTONE) {
 			try {
-				if(item.getEnch().containsKey(Enchantment.FIRE_ASPECT)) {
-					int enchLevel = item.getEnchantmentLevel(Enchantment.FIRE_ASPECT);
-					enchLevel++;
-					
-					item.addEnchantment(Enchantment.FIRE_ASPECT, enchLevel);}
-				else {item.addEnchantment(Enchantment.FIRE_ASPECT, 1);}
+				item.addEnchantment(Enchantment.FIRE_ASPECT,item.getEnchantmentLevel(Enchantment.FIRE_ASPECT)+1);
 				
 			} catch (Exception e) {System.out.println("Fire aspect eklenemedi");}
 		}
-				
-		item.update();
+		
+		nmsStack.setTag(tag);
+		ItemStack newStackedItem = CraftItemStack.asBukkitCopy(nmsStack);
+		System.out.println(item.getEnchantments());
+		newStackedItem.addEnchantments(item.getEnchantments());
 		
 		
-		return item;
+		return newStackedItem;
 		
 	}
 
