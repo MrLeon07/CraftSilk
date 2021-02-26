@@ -1,62 +1,71 @@
 package GameSystem;
 
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
-
+import items.Detector;
 import items.ItemsBase;
+import net.minecraft.server.v1_16_R3.NBTTagCompound;
+import net.minecraft.server.v1_16_R3.NBTTagList;
 
 public class AlchemyBase {
 
 	public ItemsBase resetPlus(ItemsBase item) {
-
-		/*ItemsBase newBased  = new ItemsBase();
-		newBased.setItemStageLevel(item.getItemStageLevel());
-		newBased.setId(item.getId());
-		newBased.setItemDesc(item.getItemDesc());
-		newBased.setItemMaterial(item.getType());
-		newBased.setItemMeta(item.getItemMeta());
-		newBased.setItemName(item.getItemName());
-		newBased.setItemPlus(0);
-		newBased.setItemStageName(item.getItemStageName());
-		newBased.setAmount(1);
-		newBased.update();*/
-		item.removeEnchantment(Enchantment.DAMAGE_ALL);
 		item.setItemPlus(0);
+		
+		int itemStageLevel = item.getItemStageLevel();
+		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		NBTTagCompound tag = nmsStack.getOrCreateTag();
+		NBTTagList modifiers = new NBTTagList();
+		NBTTagCompound damage = new NBTTagCompound();
+		NBTTagCompound attackSpeed = new NBTTagCompound();
+		damage.setString("AttributeName", "generic.attack_damage");
+		damage.setString("Name", "generic.attack_damage");
+		damage.setString("Slot", "mainhand");
+		damage.setInt("Operation", 0);
+		damage.setDouble("Amount", (10+(itemStageLevel*5)));
+		int[] intArray = {42853, 1689024593, -201178, -1559272105};
+		damage.setIntArray("UUID",intArray );
+		modifiers.add(damage);
+		modifiers.add(attackSpeed);
+		tag.set("AttributeModifiers", modifiers);
+		nmsStack.setTag(tag);
+		ItemStack new_item = CraftItemStack.asBukkitCopy(nmsStack);
+		Detector det = new Detector(new_item);
+		item = det.getItem();
+		item.update();
+		return item;
+		
+	}
+	public ItemsBase incrasePlus(ItemsBase item) {
+		item.setItemPlus(item.getItemPlus()+1);
+		int itemPlus = item.getItemPlus();
+		int itemStageLevel = item.getItemStageLevel();
+		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		NBTTagCompound tag = nmsStack.getOrCreateTag();
+		NBTTagList modifiers = new NBTTagList();
+		NBTTagCompound damage = new NBTTagCompound();
+		NBTTagCompound attackSpeed = new NBTTagCompound();
+		damage.setString("AttributeName", "generic.attack_damage");
+		damage.setString("Name", "generic.attack_damage");
+		damage.setString("Slot", "mainhand");
+		damage.setInt("Operation", 0);
+		damage.setDouble("Amount", (10+(itemStageLevel*5))+(itemPlus*1.3));
+		int[] intArray = {42853, 1689024593, -201178, -1559272105};
+		damage.setIntArray("UUID",intArray );
+		modifiers.add(damage);
+		modifiers.add(attackSpeed);
+		tag.set("AttributeModifiers", modifiers);
+		nmsStack.setTag(tag);
+		ItemStack new_item = CraftItemStack.asBukkitCopy(nmsStack);
+		Detector det = new Detector(new_item);
+		item = det.getItem();
 		item.update();
 		return item;
 	}
-	public ItemsBase incrasePlus(ItemsBase item) {
 		
-		//this.Enchant.remove(Enchantment.DAMAGE_ALL);
 	
-		if(item.getItemStageLevel()<=3) {
-		
-			if(item.getItemPlus()<10) {
-			item.setItemPlus(item.getItemPlus()+1);}
-			
-			
-		if(item.getItemPlus()>5) {
-			item.removeEnchantment(Enchantment.DAMAGE_UNDEAD);
-			item.addEnchantment(Enchantment.DAMAGE_UNDEAD, item.getItemPlus()-5);
-			item.removeEnchantment(Enchantment.DAMAGE_ALL);
-			item.addEnchantment(Enchantment.DAMAGE_ALL, 5);
-			}
-		else {
-			
-			item.removeEnchantment(Enchantment.DAMAGE_ALL);
-			item.addEnchantment(Enchantment.DAMAGE_ALL, item.getItemPlus());
-		}
-		item.removeEnchantment(Enchantment.LOOT_BONUS_MOBS);			
-		item.addEnchantment(Enchantment.LOOT_BONUS_MOBS, item.getItemStageLevel());
-		item.update();}
-		
-		
-
-		return item;
-	
-		
-	}
 	public ItemsBase addBlue(ItemStack Stone,ItemsBase item) {
 		///////BURAYI DÜZELT BOZUK BURASI ////////////////////////
 		if(Stone.getType() == Material.GUNPOWDER) {
