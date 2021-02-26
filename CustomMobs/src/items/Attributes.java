@@ -11,9 +11,7 @@ import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.minecraft.server.v1_16_R3.NBTTagList;
 
 public class Attributes {
-	public Attributes(){
-		
-	}
+
 	public ItemStack gen() {
 	ItemStack item = new ItemStack(Material.DIAMOND_SWORD,1);
 	ItemMeta itemMeta = item.getItemMeta();

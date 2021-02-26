@@ -20,14 +20,14 @@ public class itemCommand implements CommandExecutor{
 				Player senderPlayer = (Player) sender;
 				senderPlayer.sendMessage(command);
 				Attributes att = new Attributes();
-				ItemStack it = att.gen();
+			
 
 				senderPlayer.getWorld().dropItem(senderPlayer.getLocation(),att.gen());
 				try {
 				senderPlayer.sendMessage("Ýtem düþürüldü... ");}
 				catch(Exception e ) {
 					System.out.println("item oluþturulamadý. ");
-					System.out.println(it.getType());
+					
 				}
 			}
 		}
