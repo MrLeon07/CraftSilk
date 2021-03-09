@@ -3,9 +3,11 @@ package main;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,8 +19,19 @@ import mobs.bossZombie;
 import net.minecraft.server.v1_16_R3.*;
 
 public class Main extends JavaPlugin{
+	public static HashMap<Material,Integer> armors = new HashMap<Material,Integer>();
+	public static HashMap<Material,Integer> swords = new HashMap<Material,Integer>();
 	@Override
 	public void onEnable() {
+		swords.putAll(Map.of(Material.WOODEN_SWORD, 4, Material.STONE_SWORD, 5, Material.GOLDEN_SWORD, 4, Material.IRON_SWORD, 6,Material.DIAMOND_SWORD, 7,Material.NETHERITE_SWORD,8));
+		armors.putAll(Map.of(Material.LEATHER_HELMET, 1,Material.LEATHER_CHESTPLATE, 3, Material.LEATHER_LEGGINGS, 2, Material.LEATHER_BOOTS, 1,
+				Material.CHAINMAIL_HELMET, 1,Material.CHAINMAIL_CHESTPLATE, 3, Material.CHAINMAIL_LEGGINGS, 2, Material.CHAINMAIL_BOOTS, 1));
+		armors.putAll(Map.of(Material.IRON_HELMET, 1,Material.IRON_CHESTPLATE, 3, Material.IRON_LEGGINGS, 2, Material.IRON_BOOTS, 1,
+				Material.GOLDEN_HELMET, 1,Material.GOLDEN_CHESTPLATE, 3, Material.GOLDEN_LEGGINGS, 2, Material.GOLDEN_BOOTS, 1));
+		armors.putAll(Map.of(Material.DIAMOND_HELMET, 1,Material.DIAMOND_CHESTPLATE, 3, Material.DIAMOND_LEGGINGS, 2, Material.DIAMOND_BOOTS, 1,
+				Material.NETHERITE_HELMET, 1,Material.NETHERITE_CHESTPLATE, 3, Material.NETHERITE_LEGGINGS, 2, Material.NETHERITE_BOOTS, 1));
+				
+		
 		System.out.println("Plugin aktif edildi");
 		this.getCommand("cmonster").setExecutor(new commandEx());
 		this.getCommand("item").setExecutor(new itemCommand());

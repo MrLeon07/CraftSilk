@@ -1,14 +1,22 @@
 package items;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import main.Main;
+
 
 
 public class Detector {
-	private final ItemsBase item = new ItemsBase();
-
+	private CustomSword sword;
+	private ItemStack stackitem;
+	private HashMap<Material,Integer> armors = Main.armors;
+	private HashMap<Material,Integer> swords = Main.swords;
 	private boolean hasId = false;
 	private boolean hasPlus = false;
 	private boolean hasStageName = false;
@@ -16,34 +24,47 @@ public class Detector {
 	//her bir iþlemde ilgili deðeri deðiþtirmeyi unutma
 	
 	public Detector(ItemStack item) {
+		this.stackitem = item;		
+		
+		
+		if(swords.containsKey(item.getType())) {
+			this.sword = new CustomSword();
+			this.sword.setCustomDamage(swords.get(item.getType()).intValue());
+			
+			
+			
+		}
+		
+
+	}
+	private void DetectSword(CustomSword sword) {/////Burada kaldýk
+		ItemStack item = this.stackitem;
 		ItemMeta meta = item.getItemMeta();
 		for(int i = 0; i<meta.getLore().size();i++) {
-			if(meta.getLore().get(i).startsWith(this.item.guclendirme)) {
-				this.item.setItemPlus(Integer.parseInt(meta.getLore().get(i).substring(this.item.guclendirme.length()-1).trim()));
+			if(meta.getLore().get(i).startsWith(this.sword.guclendirme)) {
+				this.sword.setItemPlus(Integer.parseInt(meta.getLore().get(i).substring(this.sword.guclendirme.length()-1).trim()));
 				//parse int inte cevirir. substring içindeki harfleri/kelimeleri atýyor. trim boþluklarý siliyor
 				this.hasPlus = true;
 				
 			}
-			else if(meta.getLore().get(i).startsWith(this.item.sýralama)) {
-				this.item.setItemStageName(meta.getLore().get(i).substring(this.item.sýralama.length()-1));
+			else if(meta.getLore().get(i).startsWith(this.sword.sýralama)) {
+				this.sword.setItemStageName(meta.getLore().get(i).substring(this.sword.sýralama.length()-1));
 				this.hasStageName = true;
 			}
-			else if(meta.getLore().get(i).startsWith(this.item.kod)) {
-				this.item.setId(Integer.parseInt(meta.getLore().get(i).substring(this.item.kod.length()-1).trim()));
+			else if(meta.getLore().get(i).startsWith(this.sword.kod)) {
+				this.sword.setId(Integer.parseInt(meta.getLore().get(i).substring(this.sword.kod.length()-1).trim()));
 				this.hasId = true;
 			}
 		}
 		if(this.hasId && this.hasPlus && this.hasStageName) {
 		ItemMeta meta1 = item.getItemMeta();
-		this.item.setItemMeta(meta1);
-		this.item.setItemMaterial(item.getType());
-		this.item.update();
+		this.sword.setItemMeta(meta1);
+		this.sword.setItemMaterial(item.getType());
+		this.sword.update();
 		
 		}
-		this.item.addEnchantments(item.getEnchantments());
+		this.sword.addEnchantments(item.getEnchantments());
 		
-		
-
 	}
 	public boolean isCustomItem() {
 		if(this.hasId && this.hasPlus && this.hasStageName) {
@@ -54,19 +75,9 @@ public class Detector {
 		}
 	}
 	public ItemsBase getItem() {
-		return this.item;
+		return this.basedItem;
 	}
-	public CustomSword getSword() {
-		CustomSword sw = (CustomSword)this.item;
-		if(this.item.getType() == Material.WOODEN_SWORD) {sw.setCustomDamage(4);}
-		else if(this.item.getType() == Material.STONE_SWORD) {sw.setCustomDamage(5);}
-		else if(this.item.getType() == Material.GOLDEN_SWORD) {sw.setCustomDamage(4);}
-		else if(this.item.getType() == Material.IRON_SWORD) {sw.setCustomDamage(6);}
-		else if(this.item.getType() == Material.DIAMOND_SWORD) {sw.setCustomDamage(7);}
-		else if(this.item.getType() == Material.NETHERITE_SWORD) {sw.setCustomDamage(8);}
-		
-		return sw;
-	}
+
 
 
 

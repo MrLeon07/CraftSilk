@@ -12,13 +12,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ItemsBase extends ItemStack{
 	
 	private int itemPlus = 0;//Ýtemin + derecesini gösterir. + derecesi attrýkça damageall enchant seviyesi artar
-	private String ItemName = "Customsword";//Eþyanýn temel adý
-	private Material ItemMaterial = Material.WOODEN_SWORD;// itemin materiali. Varsayýlan olarak wood
+	private String ItemName;;//Eþyanýn temel adý
+	private Material ItemMaterial;// itemin materiali. Varsayýlan olarak wood
 	private Map<Enchantment,Integer> Enchant = this.getEnchantments();// Varsayýlaný zaten var olan enchler
 	private int id = 1;// eþyanýn idsi varsayýlan 1 yani 1. seviye kýlýç
-	private String ItemStageName = "Sýradan"; // Ýtem düzeyi item idsi ile deðiþecek þekilde ayarlanacak
-	private String ItemDesc = "Gerçek savaþçýnýn ilk kýlýcý"; // Hawalý bir açýklama :D
-	private int itemStageLevel = 1; // Stage level plus ile toplanýr ve enchant seviyesini attýrýr
+	private String ItemStageName; // Ýtem düzeyi item idsi ile deðiþecek þekilde ayarlanacak
+	private String ItemDesc; // Hawalý bir açýklama :D
+	private int itemStageLevel;; // Stage level plus ile toplanýr ve enchant seviyesini attýrýr
 	//-------------------------------------- ÖRNEK METÝNLER ----------------
 		//Bunlar detectorde kullanýlýyor kolaylýk olsun diye buraya ekledim. Uzunluk vs. alýyorum. ayrýca update methodunda da yer alýyorlar.
 	public final String guclendirme = "Güçlendirme seviyesi: ";
