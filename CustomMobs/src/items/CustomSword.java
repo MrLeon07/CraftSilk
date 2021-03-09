@@ -20,7 +20,7 @@ public class CustomSword extends ItemsBase{
 	int id = 1;// eþyanýn idsi varsayýlan 1 yani 1. seviye kýlýç
 	String swordStageName ="Sýradan"; // Ýtem düzeyi item idsi ile deðiþecek þekilde ayarlanacak
 	String swordDesc = "Gercek savascýnýn ilk kýlýcý"; // Hawalý bir açýklama :D
-	int swordStageLevel = 1; // Stage level plus ile toplanýr ve enchant seviyesini attýrýr
+	int swordStageLevel = 1; // Stage level plus ilecr toplanýr ve enchant seviyesini attýrýr
 	public CustomSword() {
 
 		this.setId(1);

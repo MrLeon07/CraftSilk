@@ -44,6 +44,8 @@ public class Main extends JavaPlugin{
 	public void onDisable() {
 		System.out.println("plugin kapatýldý :(");
 		
+		
+		
 	}
 	public void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
 		try {

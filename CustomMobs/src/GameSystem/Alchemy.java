@@ -16,6 +16,7 @@ public class Alchemy extends AlchemyBase{
 		int resultSlot = 40;
 		ItemStack weapon =item;
 		ItemStack another = inv.getItem(anotherslot);
+		
 		if(weapon != null && another != null && weapon.getType() != Material.AIR && another.getType() != Material.AIR) {
 			
 			Detector detItem = new Detector(item);
