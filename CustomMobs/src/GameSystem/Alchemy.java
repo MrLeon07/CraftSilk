@@ -21,7 +21,6 @@ public class Alchemy extends AlchemyBase{
 			Detector detItem = new Detector(item);
 			
 				if(detItem.isCustomItem()) {
-					CustomSword itembased = detItem.getSword();
 				if(another.getType() == Material.GLOWSTONE_DUST) {
 					inv.setItem(11, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(12, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
@@ -30,10 +29,18 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(15, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(22, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));					
 					inv.setItem(31, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
-					ItemStack newItem = this.incrasePlus(itembased);//itemsBase ver
+				if(detItem.getType().equalsIgnoreCase("weapon")) {
+					ItemStack newItem = this.incrasePlus(detItem.getSword());
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
 					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
+				else if(detItem.getType().equalsIgnoreCase("armor")) {
+					ItemStack newItem = this.incrasePlus(detItem.getArmor());
+					inv.setItem(resultSlot, newItem);
+					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
+					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}//itemsBase ver
+					
+					}
 				else if(another.getType() == Material.REDSTONE || another.getType() == Material.SUGAR || another.getType() == Material.GUNPOWDER) {
 					inv.setItem(11, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(12, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
