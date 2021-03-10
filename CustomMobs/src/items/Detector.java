@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import main.Main;
+import settings.itemInfoForArmors;
 
 
 
@@ -15,7 +16,7 @@ public class Detector {
 	private CustomArmor armor;
 	private String type = "unKnown";
 	private ItemStack stackitem;
-	private HashMap<Material,Integer> armors = Main.armors;
+	private HashMap<Material,itemInfoForArmors> armors = Main.armors;
 	private HashMap<Material,Integer> swords = Main.swords;
 	private boolean hasId = false;
 	private boolean hasPlus = false;
@@ -36,7 +37,7 @@ public class Detector {
 		else if(armors.containsKey(item.getType())) {
 			this.setType("armor");
 			this.armor = new CustomArmor();
-			this.armor.setCustomDeffence(armors.get(item.getType()).intValue());
+			this.armor.setCustomDeffence(armors.get(item.getType()).getBaseDeffence());
 			this.armor.setItemMaterial(item.getType());
 			this.DetectArmor(this.armor);
 		}

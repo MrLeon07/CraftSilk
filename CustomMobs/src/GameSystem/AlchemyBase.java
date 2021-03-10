@@ -75,16 +75,16 @@ public class AlchemyBase {
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = nmsStack.getOrCreateTag();
 		NBTTagList modifiers = new NBTTagList();
-		NBTTagCompound damage = new NBTTagCompound();
-		damage.setString("AttributeName", "generic.armor");
-		damage.setString("Name", "generic.armor");
-		damage.setString("Slot", "mainhand");
-		damage.setInt("Operation", 0);
-		damage.setDouble("Amount", item.getCustomDeffence()+(10+(itemStageLevel*5))+(itemPlus*1.3));
+		NBTTagCompound deffence = new NBTTagCompound();
+		deffence.setString("AttributeName", "generic.armor");
+		deffence.setString("Name", "generic.armor");
+		deffence.setString("Slot", "mainhand");
+		deffence.setInt("Operation", 0);
+		deffence.setDouble("Amount", item.getCustomDeffence()+(10+(itemStageLevel*5))+(itemPlus*main.Main.armors.get(item.getType()).getArmor_deffence_power_per_plus()));
 		
-		int[] intArray = {42853, 1689024593, -201178, -1559272105};
-		damage.setIntArray("UUID",intArray );
-		modifiers.add(damage);
+		
+		deffence.setIntArray("UUID",main.Main.armors.get(item.getType()).getDeffenceUUID());
+		modifiers.add(deffence);
 		tag.set("AttributeModifiers", modifiers);
 		nmsStack.setTag(tag);
 		ItemStack new_item = CraftItemStack.asBukkitCopy(nmsStack);
@@ -92,6 +92,30 @@ public class AlchemyBase {
 		new_item.addEnchantments(item.getEnchantments());
 		Bukkit.broadcastMessage(item.getEnchantments().toString());
 		return new_item;
+	}
+	public ItemStack AddMaxHealthBlue(CustomArmor item) {
+		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		NBTTagCompound tag = nmsStack.getOrCreateTag();
+		NBTTagList modifiers = new NBTTagList();
+		NBTTagCompound deffence = new NBTTagCompound();
+		deffence.setString("AttributeName", "generic.max_health");
+		deffence.setString("Name", "generic.max_health");
+		deffence.setString("Slot", main.Main.armors.get(item.getType()).getSlotName());
+		deffence.setInt("Operation", 0);
+		deffence.setDouble("Amount", (int) Math.random()*main.Main.armors.get(item.getType()).getMax_health());
+		
+		
+		deffence.setIntArray("UUID",main.Main.armors.get(item.getType()).getHealthUUID());
+		modifiers.add(deffence);
+		tag.set("AttributeModifiers", modifiers);
+		nmsStack.setTag(tag);
+		ItemStack new_item = CraftItemStack.asBukkitCopy(nmsStack);
+		System.out.println(item.getEnchantments());
+		new_item.addEnchantments(item.getEnchantments());
+		Bukkit.broadcastMessage(item.getEnchantments().toString());
+		return new_item;
+		
+		
 	}
 		
 	

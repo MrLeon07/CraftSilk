@@ -16,7 +16,7 @@ public class CustomArmor extends ItemsBase{
 	String armorName = "Custom Armor";//Eþyanýn temel adý
 
 
-	int id = 2;// eþyanýn idsi varsayýlan 1 yani 1. seviye kýlýç
+	int id = 2;// eþyanýn idsi varsayýlan 1 yani 
 	String armorStageName ="Sýradan"; // Ýtem düzeyi item idsi ile deðiþecek þekilde ayarlanacak
 	String armorDesc = "Baslangýc icin güzel bir zýrh parcasý"; // Hawalý bir açýklama :D
 	int armorStageLevel = 1; // Stage level plus ile toplanýr ve enchant seviyesini attýrýr

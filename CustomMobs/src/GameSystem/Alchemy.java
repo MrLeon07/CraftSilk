@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import items.CustomSword;
 import items.Detector;
 
 public class Alchemy extends AlchemyBase{
