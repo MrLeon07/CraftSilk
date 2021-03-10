@@ -19,15 +19,17 @@ import mobs.bossZombie;
 import net.minecraft.server.v1_16_R3.*;
 import settings.generator;
 import settings.itemInfoForArmors;
+import settings.itemInfoForWeapons;
 
 public class Main extends JavaPlugin{
 	public static HashMap<Material,itemInfoForArmors> armors = new HashMap<Material,itemInfoForArmors>();
-	public static HashMap<Material,Integer> swords = new HashMap<Material,Integer>();
+	public static HashMap<Material, itemInfoForWeapons> swords = new HashMap<Material, itemInfoForWeapons>();
 	@Override
 	public void onEnable() {
-		swords.putAll(Map.of(Material.WOODEN_SWORD, 4, Material.STONE_SWORD, 5, Material.GOLDEN_SWORD, 4, Material.IRON_SWORD, 6,Material.DIAMOND_SWORD, 7,Material.NETHERITE_SWORD,8));
+		
 		generator gen = new generator();
 		armors = gen.generateDefaultArmor();
+		swords = gen.generateDefaultWeapons();
 		System.out.println("Plugin aktif edildi");
 		this.getCommand("cmonster").setExecutor(new commandEx());
 		this.getCommand("item").setExecutor(new itemCommand());

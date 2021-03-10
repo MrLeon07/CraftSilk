@@ -26,7 +26,7 @@ public class itemInfoForArmors extends itemInfoBase{
 	private double armor_deffence_power_per_plus = 1.0;
 	private int baseDeffence = 1;
 	private double max_speed;
-	public itemInfoForArmors(String slotName,int armor_deffence_per_plus,int max_health,int max_plus,int id,Material material,int baseDeffence) {
+	public itemInfoForArmors(Material material,int id,int baseDeffence,int max_plus,int armor_deffence_per_plus,String slotName,int max_health) {
 		this.setId(id);
 		this.setBaseDeffence(baseDeffence);
 		this.setMaterial(material);
@@ -42,11 +42,11 @@ public class itemInfoForArmors extends itemInfoBase{
 		this.armor_deffence_power_per_plus = armor_deffence_power_per_plus;
 	}
 	public int[] getDeffenceUUID() {
-		int[] intArray = {(this.getId()*10)+1, (this.getId()*10)+1, (this.getId()*10)+1, (this.getId()*10)+1};
+		int[] intArray = {(this.getId()*100)+1, (this.getId()*100)+1, (this.getId()*100)+1, (this.getId()*100)+1};
 		return intArray;
 	}
 	public int[] getHealthUUID() {
-		int[] intArray = {(this.getId()+2),(this.getId()+2),(this.getId()+2),(this.getId()+2)};
+		int[] intArray = {((this.getId()*100)+2),((this.getId()*100)+2),((this.getId()*100)+2),((this.getId()*100)+2)};
 		return intArray;
 	}
 	public int getBaseDeffence() {

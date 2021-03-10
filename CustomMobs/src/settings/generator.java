@@ -5,48 +5,52 @@ import java.util.HashMap;
 import org.bukkit.Material;
 
 public class generator {
-	//(String slotName,double armor_deffence_per_plus,double max_health,int max_plus,int id,Material material,int baseDeffece)
-	/*armors.putAll(Map.of(Material.LEATHER_HELMET, 1,Material.LEATHER_CHESTPLATE, 3, Material.LEATHER_LEGGINGS, 2, Material.LEATHER_BOOTS, 1,
-				Material.CHAINMAIL_HELMET, 1,Material.CHAINMAIL_CHESTPLATE, 3, Material.CHAINMAIL_LEGGINGS, 2, Material.CHAINMAIL_BOOTS, 1));
-		armors.putAll(Map.of(Material.IRON_HELMET, 1,Material.IRON_CHESTPLATE, 3, Material.IRON_LEGGINGS, 2, Material.IRON_BOOTS, 1,
-				Material.GOLDEN_HELMET, 1,Material.GOLDEN_CHESTPLATE, 3, Material.GOLDEN_LEGGINGS, 2, Material.GOLDEN_BOOTS, 1));
-		armors.putAll(Map.of(Material.DIAMOND_HELMET, 1,Material.DIAMOND_CHESTPLATE, 3, Material.DIAMOND_LEGGINGS, 2, Material.DIAMOND_BOOTS, 1,
-				Material.NETHERITE_HELMET, 1,Material.NETHERITE_CHESTPLATE, 3, Material.NETHERITE_LEGGINGS, 2, Material.NETHERITE_BOOTS, 1));
-				
-		*/
+
 	public HashMap<Material,itemInfoForArmors> generateDefaultArmor(){
 		HashMap<Material,itemInfoForArmors> armors = new HashMap<Material,itemInfoForArmors>();
-		armors.put(Material.LEATHER_HELMET, new itemInfoForArmors("head",1 , 5, 10, 250, Material.LEATHER_HELMET,1));
-		armors.put(Material.LEATHER_CHESTPLATE, new itemInfoForArmors("chest",1 , 5, 20, 10, Material.LEATHER_CHESTPLATE,3));
-		armors.put(Material.LEATHER_LEGGINGS, new itemInfoForArmors("legs",1 , 5, 10, 30, Material.LEATHER_LEGGINGS,2));
-		armors.put(Material.LEATHER_BOOTS, new itemInfoForArmors("feet",1 , 5, 10, 40, Material.LEATHER_BOOTS,1));
+		//(Material material,int id,int baseDeffence,int max_plus,int armor_deffence_per_plus,String slotName,int max_health)
+		armors.put(Material.LEATHER_HELMET, new itemInfoForArmors(Material.LEATHER_HELMET,51, 1, 10, 1, "head",2));
+		armors.put(Material.LEATHER_CHESTPLATE, new itemInfoForArmors(Material.LEATHER_CHESTPLATE,52, 3, 10, 1, "chest",2));
+		armors.put(Material.LEATHER_LEGGINGS, new itemInfoForArmors(Material.LEATHER_HELMET,53, 2, 10, 1, "legs",2));
+		armors.put(Material.LEATHER_BOOTS, new itemInfoForArmors(Material.LEATHER_HELMET,54, 1, 10, 1, "feet",2));
 		
-
-		armors.put(Material.CHAINMAIL_HELMET, new itemInfoForArmors("head",1 , 5, 10, 50, Material.CHAINMAIL_HELMET,1));
-		armors.put(Material.CHAINMAIL_CHESTPLATE, new itemInfoForArmors("chest",1 , 5, 10, 60, Material.CHAINMAIL_CHESTPLATE,3));
-		armors.put(Material.CHAINMAIL_LEGGINGS, new itemInfoForArmors("legs",1 , 5, 10, 70, Material.CHAINMAIL_LEGGINGS,2));
-		armors.put(Material.CHAINMAIL_BOOTS, new itemInfoForArmors("feet",1 , 5, 10, 80, Material.CHAINMAIL_BOOTS,1));
+		armors.put(Material.CHAINMAIL_HELMET, new itemInfoForArmors(Material.CHAINMAIL_HELMET,55, 1, 10, 1, "head",3));
+		armors.put(Material.CHAINMAIL_CHESTPLATE, new itemInfoForArmors(Material.CHAINMAIL_CHESTPLATE,56, 3, 10, 1, "chest",3));
+		armors.put(Material.CHAINMAIL_LEGGINGS, new itemInfoForArmors(Material.CHAINMAIL_LEGGINGS,57, 2, 10, 1, "legs",3));
+		armors.put(Material.CHAINMAIL_BOOTS, new itemInfoForArmors(Material.CHAINMAIL_BOOTS,58, 1, 10, 1, "feet",3));
 		
-		armors.put(Material.IRON_HELMET, new itemInfoForArmors("head",1 , 5, 10, 90, Material.IRON_HELMET,1));
-		armors.put(Material.IRON_CHESTPLATE, new itemInfoForArmors("chest",1 , 5, 10, 100, Material.IRON_CHESTPLATE,3));
-		armors.put(Material.IRON_LEGGINGS, new itemInfoForArmors("legs",1 , 5, 10, 110, Material.IRON_LEGGINGS,2));
-		armors.put(Material.IRON_BOOTS, new itemInfoForArmors("feet",1 , 5, 10, 120, Material.IRON_BOOTS,1));
+		armors.put(Material.GOLDEN_HELMET, new itemInfoForArmors(Material.GOLDEN_HELMET,59, 1, 10, 2, "head",4));
+		armors.put(Material.GOLDEN_CHESTPLATE, new itemInfoForArmors(Material.GOLDEN_CHESTPLATE,60, 3, 10, 2, "chest",4));
+		armors.put(Material.GOLDEN_LEGGINGS, new itemInfoForArmors(Material.GOLDEN_LEGGINGS,61, 2, 10, 2, "legs",4));
+		armors.put(Material.GOLDEN_BOOTS, new itemInfoForArmors(Material.GOLDEN_BOOTS,62, 1, 10, 2, "feet",4));
 		
-		armors.put(Material.GOLDEN_HELMET, new itemInfoForArmors("head",1 , 5, 10, 130, Material.GOLDEN_HELMET,1));
-		armors.put(Material.GOLDEN_CHESTPLATE, new itemInfoForArmors("chest",1 , 5, 10, 140, Material.GOLDEN_CHESTPLATE,3));
-		armors.put(Material.GOLDEN_LEGGINGS, new itemInfoForArmors("legs",1 , 5, 10, 150, Material.GOLDEN_LEGGINGS,2));
-		armors.put(Material.GOLDEN_BOOTS, new itemInfoForArmors("feet",1 , 5, 10, 160, Material.GOLDEN_BOOTS,1));
+		armors.put(Material.IRON_HELMET, new itemInfoForArmors(Material.IRON_HELMET,63, 1, 10, 3, "head",6));
+		armors.put(Material.IRON_CHESTPLATE, new itemInfoForArmors(Material.IRON_CHESTPLATE,64, 3, 10, 3, "chest",6));
+		armors.put(Material.IRON_LEGGINGS, new itemInfoForArmors(Material.IRON_LEGGINGS,65, 2, 10, 3, "legs",6));
+		armors.put(Material.IRON_BOOTS, new itemInfoForArmors(Material.IRON_BOOTS,66, 1, 10, 3, "feet",6));
 		
-		armors.put(Material.DIAMOND_HELMET, new itemInfoForArmors("head",1 , 5, 10, 170, Material.DIAMOND_HELMET,1));
-		armors.put(Material.DIAMOND_CHESTPLATE, new itemInfoForArmors("chest",1 , 5, 10, 180, Material.DIAMOND_CHESTPLATE,3));
-		armors.put(Material.DIAMOND_LEGGINGS, new itemInfoForArmors("legs",1 , 5, 10, 190, Material.DIAMOND_LEGGINGS,2));
-		armors.put(Material.DIAMOND_BOOTS, new itemInfoForArmors("feet",1 , 5, 10, 200, Material.DIAMOND_BOOTS,1));
+		armors.put(Material.DIAMOND_HELMET, new itemInfoForArmors(Material.DIAMOND_HELMET,67, 1, 10, 4, "head",8));
+		armors.put(Material.DIAMOND_CHESTPLATE, new itemInfoForArmors(Material.DIAMOND_CHESTPLATE,68, 3, 10, 4, "chest",8));
+		armors.put(Material.DIAMOND_LEGGINGS, new itemInfoForArmors(Material.DIAMOND_LEGGINGS,69, 2, 10, 4, "legs",8));
+		armors.put(Material.DIAMOND_BOOTS, new itemInfoForArmors(Material.DIAMOND_BOOTS,70, 1, 10, 4, "feet",8));
 		
-		armors.put(Material.NETHERITE_HELMET, new itemInfoForArmors("head",1 , 5, 10, 210, Material.NETHERITE_HELMET,1));
-		armors.put(Material.NETHERITE_CHESTPLATE, new itemInfoForArmors("chest",1 , 5, 10, 220, Material.NETHERITE_CHESTPLATE,3));
-		armors.put(Material.NETHERITE_LEGGINGS, new itemInfoForArmors("legs",1 , 5, 10, 230, Material.NETHERITE_LEGGINGS,2));
-		armors.put(Material.NETHERITE_BOOTS, new itemInfoForArmors("feet",1 , 5, 10, 240, Material.NETHERITE_BOOTS,1));
+		armors.put(Material.NETHERITE_HELMET, new itemInfoForArmors(Material.NETHERITE_HELMET,71, 1, 10, 5, "head",10));
+		armors.put(Material.NETHERITE_CHESTPLATE, new itemInfoForArmors(Material.NETHERITE_CHESTPLATE,72, 3, 10, 5, "chest",10));
+		armors.put(Material.NETHERITE_LEGGINGS, new itemInfoForArmors(Material.NETHERITE_LEGGINGS,73, 2, 10, 5, "legs",10));
+		armors.put(Material.NETHERITE_BOOTS, new itemInfoForArmors(Material.NETHERITE_BOOTS,74, 1, 10, 5, "feet",10));
+		
+		
 		return armors;
 	}
-	
+	public HashMap<Material,itemInfoForWeapons> generateDefaultWeapons(){
+		HashMap<Material,itemInfoForWeapons> weapons = new HashMap<Material,itemInfoForWeapons>();
+		weapons.put(Material.WOODEN_SWORD, new itemInfoForWeapons(Material.WOODEN_SWORD,1 ,4 ,2.2 ));
+		weapons.put(Material.STONE_SWORD, new itemInfoForWeapons(Material.STONE_SWORD, 2, 5, 2.5));
+		weapons.put(Material.GOLDEN_SWORD, new itemInfoForWeapons(Material.GOLDEN_SWORD, 4, 5, 2.0));
+		weapons.put(Material.IRON_SWORD, new itemInfoForWeapons(Material.IRON_SWORD, 4, 6, 2.9));
+		weapons.put(Material.DIAMOND_SWORD, new itemInfoForWeapons(Material.DIAMOND_SWORD, 5, 7, 4.0));
+		weapons.put(Material.NETHERITE_SWORD, new itemInfoForWeapons(Material.NETHERITE_SWORD, 6, 8, 5.0));
+		
+		return weapons;
+	}
 }
