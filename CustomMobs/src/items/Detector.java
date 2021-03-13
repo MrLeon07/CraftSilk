@@ -69,6 +69,12 @@ public class Detector {
 		ItemMeta meta1 = item.getItemMeta();
 		this.sword.setItemMeta(meta1);
 		this.sword.setItemMaterial(item.getType());
+		try {
+			this.sword.setCustomDamage(main.Main.swords.get(item.getType()).getBaseDamage());
+		}
+		catch(Exception e) {
+			this.sword.setCustomDamage(7);
+		}
 		this.sword.update();
 		
 		}
@@ -98,6 +104,12 @@ public class Detector {
 		ItemMeta meta1 = item.getItemMeta();
 		this.armor.setItemMeta(meta1);
 		this.armor.setItemMaterial(item.getType());
+		try {
+		this.armor.setCustomDeffence(main.Main.armors.get(item.getType()).getBaseDeffence());}
+		catch(Exception e){
+			this.armor.setCustomDeffence(1);
+			
+		}
 		this.armor.update();
 		
 		}

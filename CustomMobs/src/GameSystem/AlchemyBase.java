@@ -28,7 +28,7 @@ public class AlchemyBase {
 		damage.setString("Name", "generic.attack_damage");
 		damage.setString("Slot", main.Main.swords.get(item.getType()).getSlotName());
 		damage.setInt("Operation", 0);
-		damage.setDouble("Amount", item.getCustomDamage()+(10+(itemStageLevel*5)));
+		damage.setDouble("Amount", item.getCustomDamage()+((itemStageLevel*5)));
 		int[] intArray = {42853, 1689024593, -201178, -1559272105};
 		damage.setIntArray("UUID",intArray );
 		modifiers.add(damage);
@@ -55,7 +55,7 @@ public class AlchemyBase {
 		deffence.setString("Name", "generic.armor");
 		deffence.setString("Slot", main.Main.armors.get(item.getType()).getSlotName());
 		deffence.setInt("Operation", 0);
-		deffence.setDouble("Amount", item.getCustomDeffence()+(10+(itemStageLevel*5)));
+		deffence.setDouble("Amount", item.getCustomDeffence()+((itemStageLevel*5)));
 		
 		
 		deffence.setIntArray("UUID",main.Main.armors.get(item.getType()).getDeffenceUUID());
@@ -71,6 +71,9 @@ public class AlchemyBase {
 	public ItemStack incrasePlus(CustomSword item) {
 		if(item.getItemPlus()<main.Main.swords.get(item.getType()).getPlusLimit()) {
 		item.setItemPlus(item.getItemPlus()+1);}
+		else {
+			System.out.println("Güçlendirme yapýlamadý");
+		}
 		int itemPlus = item.getItemPlus();
 		int itemStageLevel = item.getItemStageLevel();
 		item.update();

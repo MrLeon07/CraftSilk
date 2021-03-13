@@ -23,7 +23,7 @@ public class CustomSword extends ItemsBase{
 	int swordStageLevel = 1; // Stage level plus ilecr toplanýr ve enchant seviyesini attýrýr
 	public CustomSword() {
 
-		this.setId(1);
+		this.setId(id);
 		this.setAmount(1);
 		this.setItemMaterial(this.material);
 		this.setItemName(swordName);

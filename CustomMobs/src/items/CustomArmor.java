@@ -22,8 +22,8 @@ public class CustomArmor extends ItemsBase{
 	int armorStageLevel = 1; // Stage level plus ile toplanýr ve enchant seviyesini attýrýr
 	public CustomArmor() {
 
-		this.setId(1);
-		this.setAmount(1);
+		this.setId(id);
+		this.setAmount(1);		
 		this.setItemMaterial(this.material);
 		this.setItemName(armorName);
 		this.setItemPlus(armorPlus);
@@ -31,6 +31,7 @@ public class CustomArmor extends ItemsBase{
 		this.setItemDesc(armorDesc);
 		this.setItemStageName(armorStageName);
 		this.setItemStageLevel(armorStageLevel);
+		this.setCustomDeffence(main.Main.armors.get(this.material).getBaseDeffence()+this.getItemStageLevel()*3);
 		this.update();
 		
 }}

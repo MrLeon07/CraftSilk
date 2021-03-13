@@ -44,12 +44,12 @@ public class generator {
 	}
 	public HashMap<Material,itemInfoForWeapons> generateDefaultWeapons(){
 		HashMap<Material,itemInfoForWeapons> weapons = new HashMap<Material,itemInfoForWeapons>();
-		weapons.put(Material.WOODEN_SWORD, new itemInfoForWeapons(Material.WOODEN_SWORD,1 ,4 ,2.2 ));
-		weapons.put(Material.STONE_SWORD, new itemInfoForWeapons(Material.STONE_SWORD, 2, 5, 2.5));
-		weapons.put(Material.GOLDEN_SWORD, new itemInfoForWeapons(Material.GOLDEN_SWORD, 4, 5, 2.0));
-		weapons.put(Material.IRON_SWORD, new itemInfoForWeapons(Material.IRON_SWORD, 4, 6, 2.9));
-		weapons.put(Material.DIAMOND_SWORD, new itemInfoForWeapons(Material.DIAMOND_SWORD, 5, 7, 4.0));
-		weapons.put(Material.NETHERITE_SWORD, new itemInfoForWeapons(Material.NETHERITE_SWORD, 6, 8, 5.0));
+		weapons.put(Material.WOODEN_SWORD, new itemInfoForWeapons(Material.WOODEN_SWORD,1 ,4, 10,2.2 ));
+		weapons.put(Material.STONE_SWORD, new itemInfoForWeapons(Material.STONE_SWORD, 2, 5,10, 2.5));
+		weapons.put(Material.GOLDEN_SWORD, new itemInfoForWeapons(Material.GOLDEN_SWORD, 4, 5,10, 2.0));
+		weapons.put(Material.IRON_SWORD, new itemInfoForWeapons(Material.IRON_SWORD, 4, 6,10, 2.9));
+		weapons.put(Material.DIAMOND_SWORD, new itemInfoForWeapons(Material.DIAMOND_SWORD, 5, 7,10, 4.0));
+		weapons.put(Material.NETHERITE_SWORD, new itemInfoForWeapons(Material.NETHERITE_SWORD, 6, 8,10, 5.0));
 		
 		return weapons;
 	}
