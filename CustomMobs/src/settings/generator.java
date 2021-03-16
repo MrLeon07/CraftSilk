@@ -13,7 +13,7 @@ public class generator {
 	public HashMap<Material,itemInfoForArmors> generateDefaultArmor(){
 		HashMap<Material,itemInfoForArmors> armors = new HashMap<Material,itemInfoForArmors>();
 		//(Material material,int id,int baseDeffence,int max_plus,int armor_deffence_per_plus,String slotName,int max_health)
-		ResultSet results = main.Main.DbConnection.getArmors();
+		/*ResultSet results = main.Main.DbConnection.getArmors();
 		try {
 			while(results.next()) {
 				int id = results.getInt("id");
@@ -34,7 +34,7 @@ public class generator {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		/*armors.put(Material.LEATHER_HELMET, new itemInfoForArmors(Material.LEATHER_HELMET,51, 1, 10, 1, "head",2));
+		armors.put(Material.LEATHER_HELMET, new itemInfoForArmors(Material.LEATHER_HELMET,51, 1, 10, 1, "head",2));
 		armors.put(Material.LEATHER_CHESTPLATE, new itemInfoForArmors(Material.LEATHER_CHESTPLATE,52, 3, 10, 1, "chest",2));
 		armors.put(Material.LEATHER_LEGGINGS, new itemInfoForArmors(Material.LEATHER_HELMET,53, 2, 10, 1, "legs",2));
 		armors.put(Material.LEATHER_BOOTS, new itemInfoForArmors(Material.LEATHER_HELMET,54, 1, 10, 1, "feet",2));
@@ -74,7 +74,7 @@ public class generator {
 		weapons.put(Material.GOLDEN_SWORD, new itemInfoForWeapons(Material.GOLDEN_SWORD, 4, 5,10, 2.0));
 		weapons.put(Material.IRON_SWORD, new itemInfoForWeapons(Material.IRON_SWORD, 4, 6,10, 2.9));
 		weapons.put(Material.DIAMOND_SWORD, new itemInfoForWeapons(Material.DIAMOND_SWORD, 5, 7,10, 4.0));
-		weapons.put(Material.NETHERITE_SWORD, new itemInfoForWeapons(Material.NETHERITE_SWORD, 6, 8,10, 5.0));*/
+		weapons.put(Material.NETHERITE_SWORD, new itemInfoForWeapons(Material.NETHERITE_SWORD, 6, 8,10, 5.0));
 		ResultSet results = main.Main.DbConnection.getArmors();
 		try {
 			while(results.next()) {
@@ -95,7 +95,7 @@ public class generator {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		
+		/*/
 		return weapons;
 	}
 }

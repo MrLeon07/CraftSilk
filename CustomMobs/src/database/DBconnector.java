@@ -5,9 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+
+import settings.itemInfoForArmors;
+import settings.itemInfoForWeapons;
 
 public class DBconnector {
 
@@ -45,12 +50,34 @@ public class DBconnector {
 		}
 		
 	}
-	public ResultSet getArmors() {
+	public HashMap<Material,itemInfoForArmors> getArmors() {
+		HashMap<Material,itemInfoForArmors> armors = new HashMap<Material,itemInfoForArmors>();
+
 		Connection conn = this.getConnection();
 		ResultSet result = null;
 		try {
 			Statement state = conn.createStatement();
 			result = state.executeQuery("select * from customitems where ItemType = 'arm'");
+			try {
+				while(result.next()) {
+					int id = result.getInt("id");
+					String serverName = result.getString("item_code");
+					int base = result.getInt("baseValue");
+					int plusLimit = result.getInt("maxPlus");
+					double perPlus = result.getDouble("perPlusIncrement");
+					int maxHp = result.getInt("maxHp");
+					String slotName = result.getString("slotName");
+					try {
+						armors.put(Material.valueOf(serverName), new itemInfoForArmors(Material.valueOf(serverName),id,base,plusLimit,perPlus,slotName,maxHp));
+						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Zýrh listeye eklendi. id: "+id);
+					}
+					catch(Exception e) {
+						System.out.println("<Generator> Zýrh yüklenemedi. id: "+id+" server name: "+serverName);					
+					}
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
 		} catch (SQLException e) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"<Database> "+ChatColor.DARK_PURPLE+"Zýrh verileri alýnamadý. Error message: "+e.getMessage());		}
 		try {
@@ -58,14 +85,35 @@ public class DBconnector {
 		} catch (SQLException e) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"<Database> GetArmors conn.close: "+e.getMessage());
 		}
-		return result;
+		return armors;
 		}
-	public ResultSet getSwords() {
+	public HashMap<Material,itemInfoForWeapons> getSwords() {
+		HashMap<Material,itemInfoForWeapons> weapons = new HashMap<Material,itemInfoForWeapons>();
+
 		ResultSet result = null;
 		Connection conn = this.getConnection();
 		try {
 			Statement state = conn.createStatement();
 			result = state.executeQuery("select * from customitems where ItemType = 'wep'");
+			try {
+				while(result.next()) {
+					int id = result.getInt("id");
+					String serverName = result.getString("item_code");
+					int base = result.getInt("baseValue");
+					int plusLimit = result.getInt("maxPlus");
+					double perPlus = result.getDouble("perPlusIncrement");
+					
+					try {
+						weapons.put(Material.valueOf(serverName), new itemInfoForWeapons(Material.valueOf(serverName),id,base,plusLimit,perPlus));
+						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Kýlýc listeye eklendi. id: "+id);
+					}
+					catch(Exception e) {
+						System.out.println("<Generator> Kýlýc yüklenemedi. id: "+id+" server name: "+serverName);					
+					}
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
 		} catch (SQLException e) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"<Database> "+ChatColor.DARK_PURPLE+"Kýlýc verileri alýnamadý. Error message: "+e.getMessage());
 		}
@@ -76,7 +124,7 @@ public class DBconnector {
 		}
 		
 		
-		return result;
+		return weapons;
 	}
 
 

@@ -26,13 +26,15 @@ public class Main extends JavaPlugin{
 	private String DbUrl = "jdbc:mysql://185.26.147.184:3306/test";
 	private String DbUserName = "root";
 	private String Dbpassword = "cd1opBASx2zq6";
-	public static HashMap<Material,itemInfoForArmors> armors = new HashMap<Material,itemInfoForArmors>();
-	public static HashMap<Material, itemInfoForWeapons> swords = new HashMap<Material, itemInfoForWeapons>();
+	public static HashMap<Material,itemInfoForArmors> armors;// = new HashMap<Material,itemInfoForArmors>();
+	public static HashMap<Material, itemInfoForWeapons> swords;// = new HashMap<Material, itemInfoForWeapons>();
 	public static DBconnector DbConnection;
 	@Override
 	public void onEnable() {
 		DbConnection = new DBconnector(this.DbUrl,this.DbUserName,this.Dbpassword);
 		DbConnection.tryConnect();
+		armors = DbConnection.getArmors();
+		swords = DbConnection.getSwords();
 		generator gen = new generator();
 		armors = gen.generateDefaultArmor();
 		swords = gen.generateDefaultWeapons();
