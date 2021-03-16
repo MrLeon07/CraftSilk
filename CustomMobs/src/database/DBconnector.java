@@ -15,7 +15,7 @@ public class DBconnector {
 	private String password;	
 	private String username;
 	
-	public DBconnector(String url,String password,String username) {
+	public DBconnector(String url,String username,String password) {
 		this.url = url;
 		this.username = username;
 		this.password = password;

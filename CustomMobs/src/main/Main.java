@@ -32,6 +32,7 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		DbConnection = new DBconnector(this.DbUrl,this.DbUserName,this.Dbpassword);
+		DbConnection.tryConnect();
 		generator gen = new generator();
 		armors = gen.generateDefaultArmor();
 		swords = gen.generateDefaultWeapons();
