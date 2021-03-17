@@ -30,24 +30,29 @@ public class DBconnector {
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(this.url, this.username, this.password);
-			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Database sunucusuna baðlanýldý.");
 			return conn;
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED+" Sunucuyla baðlantý kurulamadý.");
 			return null;
 			
 		}
 		
 	}
-	public void tryConnect() {
+	@SuppressWarnings("unused")
+	public boolean tryConnect() {
 		Connection conn = this.getConnection();
 		try {
 			conn.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		if(conn == null) {
+			return false;}
+		else {
+			return true;
+		}
+		
 		
 	}
 	public HashMap<Material,itemInfoForArmors> getArmors() {
