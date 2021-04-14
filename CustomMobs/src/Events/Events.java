@@ -24,14 +24,19 @@ public class Events implements Listener{
 		if(invView.getTitle().equalsIgnoreCase("Alchemy") && (item != null)) {
 			
 			if(item.getType() == Material.BLACK_STAINED_GLASS_PANE || item.getType() == Material.GREEN_STAINED_GLASS_PANE || 
-					item.getType() == Material.RED_STAINED_GLASS_PANE) {
+					item.getType() == Material.RED_STAINED_GLASS_PANE || item.getType() == Material.YELLOW_STAINED_GLASS_PANE) {
 				e.setCancelled(true);
 			}
 			if(item.getType() == Material.GREEN_DYE) {
 				player.sendMessage("Simya basladý");
 				Alchemy alc = new Alchemy();
-
-				alc.StartAlchemy(inv,player,inv.getItem(10));
+				if(inv.getItem(16).getType() == Material.NETHER_BRICK) {
+					
+				}
+				else {
+					alc.StartAlchemy(inv,player,inv.getItem(10));
+				}
+				
 				e.setCancelled(true);
 				//asdasdasd}
 				

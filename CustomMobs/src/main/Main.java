@@ -12,28 +12,22 @@ import GameSystem.entityRegistry;
 import database.DBconnector;
 import mobs.bossZombie;
 import net.minecraft.server.v1_16_R3.*;
+import settings.Stages;
 import settings.itemInfoForArmors;
 import settings.itemInfoForWeapons;
 
 public class Main extends JavaPlugin{
-	private String DbUrl = "jdbc:mysql://185.26.147.184:3306/test";
-	private String DbUserName = "root";
-	private String Dbpassword = "cd1opBASx2zq6";
+	private static String DbUrl = "jdbc:mysql://185.26.147.184:3306/test";
+	private static String DbUserName = "root";
+	private static String Dbpassword = "cd1opBASx2zq6";
 	public static HashMap<Material,itemInfoForArmors> armors;// = new HashMap<Material,itemInfoForArmors>();
-	public static HashMap<Material, itemInfoForWeapons> swords;// = new HashMap<Material, itemInfoForWeapons>();
+	public static HashMap<Material, itemInfoForWeapons> swords;
+	public static HashMap<Integer,Stages> stages;// = new HashMap<Material, itemInfoForWeapons>();
 	public static DBconnector DbConnection;
 	public entityRegistry reg = new entityRegistry();
 	@Override
 	public void onEnable() {
-		DbConnection = new DBconnector(this.DbUrl,this.DbUserName,this.Dbpassword);
-		if(DbConnection.tryConnect()) {
-		armors = DbConnection.getArmors();
-		swords = DbConnection.getSwords();
-		System.out.println("<Database> Verileri alýmý tamamlandý.");}
-		else {
-			System.out.println("<Database> Database baðlantýsý saðlanamadý. Lütfen baðlantýyý kontrol edip plugini tekrar yükleyin!!!!");
-		}
-		
+		LoadSettings();
 		System.out.println("CraftSilk Plugini aktif edildi");
 		this.getCommand("cmonster").setExecutor(new commandEx());
 		this.getCommand("item").setExecutor(new itemCommand());
@@ -49,6 +43,27 @@ public class Main extends JavaPlugin{
 		
 		
 	}
-	
+	public static void LoadSettings() {
+		if(!armors.isEmpty()) {
+			armors.clear();
+		}
+		if(!swords.isEmpty()) {
+			swords.clear();
+		}
+		if(!stages.isEmpty()) {
+			stages.clear();
+		}
+		DbConnection = new DBconnector(DbUrl,DbUserName,Dbpassword);
+		if(DbConnection.tryConnect()) {
+		armors = DbConnection.getArmors();
+		swords = DbConnection.getSwords();
+		stages = DbConnection.getStages();
+		System.out.println("<Database> Verileri alýmý tamamlandý.");}
+		else {
+			System.out.println("<Database> Database baðlantýsý saðlanamadý. Lütfen baðlantýyý kontrol edip plugini tekrar yükleyin!!!!");
+			}
+		
+		
+	}
 
 }

@@ -25,8 +25,9 @@ public class itemInfoForWeapons extends itemInfoBase{
 		this.attack_power_per_plus = attackPowerPerPlus;
 	}
 /////////////////////////////////Constructor Method//////////////////////////////////////////////////////
-	public itemInfoForWeapons(Material material,int id,int baseDamage,int plus_limit,double attackPowerPerPlus) {
+	public itemInfoForWeapons(Material material,int id,int baseDamage,int plus_limit,double attackPowerPerPlus,String name) {
 		this.setSlotName("mainhand");
+		this.setCustomName(name);
 		this.setPlusLimit(plus_limit);
 		this.setBaseDamage(baseDamage);
 		this.setMaterial(material);

@@ -26,8 +26,9 @@ public class itemInfoForArmors extends itemInfoBase{
 	private double armor_deffence_power_per_plus = 1.0;
 	private int baseDeffence = 1;
 	private double max_speed;
-	public itemInfoForArmors(Material material,int id,int baseDeffence,int max_plus,double armor_deffence_per_plus,String slotName,int max_health) {
+	public itemInfoForArmors(Material material,int id,int baseDeffence,int max_plus,double armor_deffence_per_plus,String slotName,int max_health,String Name) {
 		this.setId(id);
+		this.setCustomName(Name);
 		this.setBaseDeffence(baseDeffence);
 		this.setMaterial(material);
 		this.setMax_health(max_health+1);

@@ -10,6 +10,7 @@ public class itemInfoBase {
 	private HashMap<Integer,Double> plusRatio;
 	private String slotName;
 	private Material material;
+	private String customName;
 	public int getPlusLimit() {
 		return PlusLimit;
 	}
@@ -39,6 +40,12 @@ public class itemInfoBase {
 	}
 	public void setSlotName(String slotName) {
 		this.slotName = slotName;
+	}
+	public String getCustomName() {
+		return customName;
+	}
+	public void setCustomName(String customName) {
+		this.customName = customName;
 	}
 	
 

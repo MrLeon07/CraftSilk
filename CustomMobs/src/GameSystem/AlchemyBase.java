@@ -10,6 +10,8 @@ import items.CustomArmor;
 import items.CustomSword;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.minecraft.server.v1_16_R3.NBTTagList;
+import settings.itemInfoForArmors;
+import settings.itemInfoForWeapons;
 
 public class AlchemyBase {
 
@@ -147,7 +149,7 @@ public class AlchemyBase {
 		
 		
 	}
-
+	
 	public ItemStack addBlue(ItemStack Stone,ItemStack item) {
 		
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);//nbt taglarý kopyala 
@@ -181,5 +183,40 @@ public class AlchemyBase {
 		return newStackedItem;
 		
 	}
-
+	public ItemStack Upgrade(ItemStack item) {
+		Material material = item.getType();
+		ItemStack result = null;
+		if(main.Main.armors.containsKey(material)) {
+			itemInfoForArmors information = main.Main.armors.get(material);
+			CustomArmor armor = new CustomArmor();
+			armor.setItemMaterial(material);
+			armor.setType(material);
+			armor.setCustomDeffence(information.getBaseDeffence());
+			armor.setId(information.getId());
+			armor.setItemName(main.Main.stages.get(1).getStageName()+" "+information.getCustomName());
+			armor.setItemPlus(0);
+			armor.setItemStageLevel(1);
+			armor.setItemStageName(main.Main.stages.get(1).getStageName());
+			result = armor;
+			
+			
+			
+		}
+		else if(main.Main.swords.containsKey(material)) {
+			itemInfoForWeapons information = main.Main.swords.get(material);
+			CustomSword sword = new CustomSword();
+			sword.setItemMaterial(material);
+			sword.setType(material);
+			sword.setCustomDamage(information.getBaseDamage());
+			sword.setId(information.getId());
+			sword.setItemName(main.Main.stages.get(1).getStageName()+" "+information.getCustomName());
+			sword.setItemPlus(0);
+			sword.setItemStageLevel(1);
+			sword.setItemStageName(main.Main.stages.get(1).getStageName());
+			result = sword;
+			
+		}
+		return result;
+		
+	}
 }
