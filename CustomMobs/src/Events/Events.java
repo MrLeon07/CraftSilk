@@ -31,6 +31,7 @@ public class Events implements Listener{
 				player.sendMessage("Simya basladý");
 				Alchemy alc = new Alchemy();
 				if(inv.getItem(16).getType() == Material.NETHER_BRICK) {
+					alc.UpgradeItem(inv, player);
 					
 				}
 				else {
