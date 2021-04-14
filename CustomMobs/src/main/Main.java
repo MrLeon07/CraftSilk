@@ -44,13 +44,13 @@ public class Main extends JavaPlugin{
 		
 	}
 	public static void LoadSettings() {
-		if(!armors.isEmpty()) {
+		if(armors!=null) {
 			armors.clear();
 		}
-		if(!swords.isEmpty()) {
+		if(swords!=null) {
 			swords.clear();
 		}
-		if(!stages.isEmpty()) {
+		if(stages!=null) {
 			stages.clear();
 		}
 		DbConnection = new DBconnector(DbUrl,DbUserName,Dbpassword);
