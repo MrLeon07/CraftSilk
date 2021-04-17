@@ -123,6 +123,7 @@ public class DBconnector {
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Kýlýc listeye eklendi. id: "+id);
 					}
 					catch(Exception e) {
+						System.out.println(e.getMessage());
 						System.out.println("<Generator> Kýlýc yüklenemedi. id: "+id+" server name: "+serverName);					
 					}
 				}
