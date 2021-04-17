@@ -55,9 +55,10 @@ public class Main extends JavaPlugin{
 		}
 		DbConnection = new DBconnector(DbUrl,DbUserName,Dbpassword);
 		if(DbConnection.tryConnect()) {
+		stages = DbConnection.getStages();
 		armors = DbConnection.getArmors();
 		swords = DbConnection.getSwords();
-		stages = DbConnection.getStages();
+	
 		System.out.println("<Database> Verileri alýmý tamamlandý.");}
 		else {
 			System.out.println("<Database> Database baðlantýsý saðlanamadý. Lütfen baðlantýyý kontrol edip plugini tekrar yükleyin!!!!");

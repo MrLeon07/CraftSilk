@@ -10,7 +10,7 @@ public class CustomSword extends ItemsBase{
 	private int[] attackSpeedUUID;
 	
 	public CustomSword(int id,Material material,String CustomName,int baseValue,int maxPlus,double perPlus,String Slot,int CustomModel,String desc,int StageLevel) {
-
+	
 		this.setId(id);
 		this.setAmount(1);		
 		this.setType(material);

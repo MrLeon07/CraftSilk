@@ -119,12 +119,13 @@ public class DBconnector {
 					int stage = result.getInt("stage");
 					
 					try {
-						weapons.put(id, new CustomSword(id,Material.valueOf(serverName),name,baseValue,plusLimit,perPlus,slotName,CustomModel,desc,stage));
+						weapons.put(id, new CustomSword(id,Material.valueOf(serverName.toUpperCase()),name,baseValue,plusLimit,perPlus,slotName,CustomModel,desc,stage));
+						
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Kýlýc listeye eklendi. id: "+id);
 					}
 					catch(Exception e) {
-						System.out.println(e.getMessage());
-						System.out.println("<Generator> Kýlýc yüklenemedi. id: "+id+" server name: "+serverName);					
+						
+						System.out.println("<Generator> Kýlýc yüklenemedi. id: "+id+" server name: "+serverName+" Hata: "+ e.getMessage());					
 					}
 				}
 			} catch (SQLException e) {
