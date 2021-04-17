@@ -10,8 +10,6 @@ import items.CustomArmor;
 import items.CustomSword;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.minecraft.server.v1_16_R3.NBTTagList;
-import settings.itemInfoForArmors;
-import settings.itemInfoForWeapons;
 
 public class AlchemyBase {
 
@@ -20,7 +18,6 @@ public class AlchemyBase {
 		
 		System.out.println(item.getEnchantments());
 		item.setItemPlus(0);
-		int itemStageLevel = item.getItemStageLevel();
 		item.update();
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = nmsStack.getOrCreateTag();
@@ -28,11 +25,12 @@ public class AlchemyBase {
 		NBTTagCompound damage = new NBTTagCompound();
 		damage.setString("AttributeName", "generic.attack_damage");
 		damage.setString("Name", "generic.attack_damage");
-		damage.setString("Slot", main.Main.swords.get(item.getType()).getSlotName());
+		damage.setString("Slot",item.getSlot());
 		damage.setInt("Operation", 0);
-		damage.setDouble("Amount", item.getCustomDamage()+((itemStageLevel*5)));
-		int[] intArray = {42853, 1689024593, -201178, -1559272105};
-		damage.setIntArray("UUID",intArray );
+		damage.setDouble("Amount", item.getBaseValue());
+		
+		
+		damage.setIntArray("UUID",item.getDamageUUID() );
 		modifiers.add(damage);
 		tag.set("AttributeModifiers", modifiers);
 		nmsStack.setTag(tag);
@@ -46,8 +44,6 @@ public class AlchemyBase {
 	public ItemStack resetPlus(CustomArmor item) {
 		System.out.println(item.getEnchantments());
 		item.setItemPlus(0);
-
-		int itemStageLevel = item.getItemStageLevel();
 		item.update();
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = nmsStack.getOrCreateTag();
@@ -55,12 +51,12 @@ public class AlchemyBase {
 		NBTTagCompound deffence = new NBTTagCompound();
 		deffence.setString("AttributeName", "generic.armor");
 		deffence.setString("Name", "generic.armor");
-		deffence.setString("Slot", main.Main.armors.get(item.getType()).getSlotName());
+		deffence.setString("Slot",item.getSlot());
 		deffence.setInt("Operation", 0);
-		deffence.setDouble("Amount", item.getCustomDeffence()+((itemStageLevel*5)));
+		deffence.setDouble("Amount", item.getBaseValue());
 		
 		
-		deffence.setIntArray("UUID",main.Main.armors.get(item.getType()).getDeffenceUUID());
+		deffence.setIntArray("UUID",item.getDeffenceUUID());
 		modifiers.add(deffence);
 		tag.set("AttributeModifiers", modifiers);
 		nmsStack.setTag(tag);
@@ -71,13 +67,13 @@ public class AlchemyBase {
 		return new_item;
 	}
 	public ItemStack incrasePlus(CustomSword item) {
-		if(item.getItemPlus()<main.Main.swords.get(item.getType()).getPlusLimit()) {
+		if(item.getItemPlus()<item.getMaxPlus()) {
 		item.setItemPlus(item.getItemPlus()+1);}
 		else {
 			System.out.println("Güçlendirme yapýlamadý");
 		}
-		int itemPlus = item.getItemPlus();
-		int itemStageLevel = item.getItemStageLevel();
+	
+		
 		item.update();
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = nmsStack.getOrCreateTag();
@@ -85,11 +81,11 @@ public class AlchemyBase {
 		NBTTagCompound damage = new NBTTagCompound();
 		damage.setString("AttributeName", "generic.attack_damage");
 		damage.setString("Name", "generic.attack_damage");
-		damage.setString("Slot", main.Main.swords.get(item.getType()).getSlotName());
+		damage.setString("Slot", item.getSlot());
 		damage.setInt("Operation", 0);
-		damage.setDouble("Amount", item.getCustomDamage()+(10+(itemStageLevel*5))+(itemPlus*1.3));
-		int[] intArray = {42853, 1689024593, -201178, -1559272105};
-		damage.setIntArray("UUID",intArray );
+		damage.setDouble("Amount", item.getBaseValue()+(item.getPerPlus()*item.getItemPlus()));
+	
+		damage.setIntArray("UUID",item.getDamageUUID());
 		modifiers.add(damage);
 		tag.set("AttributeModifiers", modifiers);
 		nmsStack.setTag(tag);
@@ -99,10 +95,8 @@ public class AlchemyBase {
 		return new_item;
 	}
 	public ItemStack incrasePlus(CustomArmor item) {
-		if(item.getItemPlus()<main.Main.armors.get(item.getType()).getPlusLimit()) {
+		if(item.getItemPlus()<item.getMaxPlus()) {
 		item.setItemPlus(item.getItemPlus()+1);}
-		int itemPlus = item.getItemPlus();
-		int itemStageLevel = item.getItemStageLevel();
 		item.update();
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = nmsStack.getOrCreateTag();
@@ -110,12 +104,12 @@ public class AlchemyBase {
 		NBTTagCompound deffence = new NBTTagCompound();
 		deffence.setString("AttributeName", "generic.armor");
 		deffence.setString("Name", "generic.armor");
-		deffence.setString("Slot", main.Main.armors.get(item.getType()).getSlotName());
+		deffence.setString("Slot", item.getSlot());
 		deffence.setInt("Operation", 0);
-		deffence.setDouble("Amount", item.getCustomDeffence()+(10+(itemStageLevel*5))+(itemPlus*main.Main.armors.get(item.getType()).getArmor_deffence_power_per_plus()));
+		deffence.setDouble("Amount",item.getBaseValue()+item.getPerPlus()*item.getItemPlus());
 		
 		
-		deffence.setIntArray("UUID",main.Main.armors.get(item.getType()).getDeffenceUUID());
+		deffence.setIntArray("UUID",item.getDeffenceUUID());
 		modifiers.add(deffence);
 		tag.set("AttributeModifiers", modifiers);
 		nmsStack.setTag(tag);
@@ -132,12 +126,12 @@ public class AlchemyBase {
 		NBTTagCompound deffence = new NBTTagCompound();
 		deffence.setString("AttributeName", "generic.max_health");
 		deffence.setString("Name", "generic.max_health");
-		deffence.setString("Slot", main.Main.armors.get(item.getType()).getSlotName());
+		deffence.setString("Slot", item.getSlot());
 		deffence.setInt("Operation", 0);
-		deffence.setDouble("Amount", (int) Math.random()*main.Main.armors.get(item.getType()).getMax_health());
+		deffence.setDouble("Amount", (int) Math.random()*item.getMaxHp());
 		
 		
-		deffence.setIntArray("UUID",main.Main.armors.get(item.getType()).getHealthUUID());
+		deffence.setIntArray("UUID",item.getHpUUID());
 		modifiers.add(deffence);
 		tag.set("AttributeModifiers", modifiers);
 		nmsStack.setTag(tag);
@@ -183,40 +177,5 @@ public class AlchemyBase {
 		return newStackedItem;
 		
 	}
-	public ItemStack Upgrade(ItemStack item) {
-		Material material = item.getType();
-		ItemStack result = null;
-		if(main.Main.armors.containsKey(material)) {
-			itemInfoForArmors information = main.Main.armors.get(material);
-			CustomArmor armor = new CustomArmor();
-			armor.setItemMaterial(material);
-			armor.setType(material);
-			armor.setCustomDeffence(information.getBaseDeffence());
-			armor.setId(information.getId());
-			armor.setItemName(main.Main.stages.get(1).getStageName()+" "+information.getCustomName());
-			armor.setItemPlus(0);
-			armor.setItemStageLevel(1);
-			armor.setItemStageName(main.Main.stages.get(1).getStageName());
-			result = armor;
-			
-			
-			
-		}
-		else if(main.Main.swords.containsKey(material)) {
-			itemInfoForWeapons information = main.Main.swords.get(material);
-			CustomSword sword = new CustomSword();
-			sword.setItemMaterial(material);
-			sword.setType(material);
-			sword.setCustomDamage(information.getBaseDamage());
-			sword.setId(information.getId());
-			sword.setItemName(main.Main.stages.get(1).getStageName()+" "+information.getCustomName());
-			sword.setItemPlus(0);
-			sword.setItemStageLevel(1);
-			sword.setItemStageName(main.Main.stages.get(1).getStageName());
-			result = sword;
-			
-		}
-		return result;
-		
-	}
+
 }

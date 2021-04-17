@@ -30,13 +30,8 @@ public class Events implements Listener{
 			if(item.getType() == Material.GREEN_DYE) {
 				player.sendMessage("Simya basladý");
 				Alchemy alc = new Alchemy();
-				if(inv.getItem(16).getType() == Material.NETHER_BRICK) {
-					alc.UpgradeItem(inv, player);
-					
-				}
-				else {
-					alc.StartAlchemy(inv,player,inv.getItem(10));
-				}
+				alc.StartAlchemy(inv,player,inv.getItem(10));
+				
 				
 				e.setCancelled(true);
 				//asdasdasd}

@@ -5,7 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import items.CustomArmor;
 import items.CustomSword;
 
 
@@ -19,12 +18,11 @@ public class itemCommand implements CommandExecutor{
 				
 				Player senderPlayer = (Player) sender;
 				senderPlayer.sendMessage(command);
-				CustomSword item = new CustomSword();
-				CustomArmor armor = new CustomArmor();
-				senderPlayer.getWorld().dropItem(senderPlayer.getLocation(),armor);
-				senderPlayer.getWorld().dropItem(senderPlayer.getLocation(),item);
+				CustomSword sword = main.Main.swords.get(1);
+				senderPlayer.getWorld().dropItem(senderPlayer.getLocation(),sword);
+			
 				try {
-				senderPlayer.sendMessage(item.getItemName()+" düþürüldü... ");}
+				senderPlayer.sendMessage(sword.getCustomName()+" düþürüldü... ");}
 				catch(Exception e ) {
 					System.out.println("item oluþturulamadý. ");
 					

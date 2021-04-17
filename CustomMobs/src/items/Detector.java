@@ -1,156 +1,68 @@
 package items;
 
-import java.util.HashMap;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import main.Main;
-import settings.itemInfoForArmors;
-import settings.itemInfoForWeapons;
 
 
 
 
 public class Detector {
-	private CustomSword sword;
-	private CustomArmor armor;
-	private String type = "unKnown";
-	private ItemStack stackitem;
-	private HashMap<Material,itemInfoForArmors> armors = Main.armors;
-	private HashMap<Material, itemInfoForWeapons> swords = Main.swords;
-	private boolean hasId = false;
-	private boolean hasPlus = false;
-	private boolean hasStageName = false;
-	//Varsa true yoksa false döndürecek þekilde ayarlayýn. Her birisini kntrol edip hepsi true ise eþya custom eþyadýr. 
-	//her bir iþlemde ilgili deðeri deðiþtirmeyi unutma
-	
+	boolean isCustom = false;
+	public String type = "None";
+	private int plus = 0;
+	int id = 0;
+	private ItemStack item = null;
 	public Detector(ItemStack item) {
-		this.stackitem = item;		
-		
-		
-		if(swords.containsKey(item.getType())) {
-			this.setType("weapon");
-			this.sword = new CustomSword();
-			this.sword.setCustomDamage(swords.get(item.getType()).getBaseDamage());
-			this.sword.setItemMaterial(item.getType());		
-			this.DetectSword(this.sword);}
-		else if(armors.containsKey(item.getType())) {
-			this.setType("armor");
-			this.armor = new CustomArmor();
-			this.armor.setCustomDeffence(armors.get(item.getType()).getBaseDeffence());
-			this.armor.setItemMaterial(item.getType());
-			this.DetectArmor(this.armor);
-		}
-		else {this.setType("unknown");}
-		
-
+		this.item = item;
+		id = this.findId(item);
+		if(id>0) {
+			if(main.Main.armors.containsKey(id)) {this.type = "armor";this.isCustom=true;}
+			else if(main.Main.swords.containsKey(id)) {this.type = "weapon";this.isCustom=true;}
+			else {this.isCustom = false;}}
+		else {this.isCustom=false;}
 	}
-	private void DetectSword(CustomSword sword) {/////Burada kaldýk
-		ItemStack item = this.stackitem;
+	private CustomSword getCustomSword(int id) {return main.Main.swords.get(id);}
+	private CustomArmor getCustomArmor(int id) {return main.Main.armors.get(id);}
+	private Integer findId(ItemStack item) {
+		int ids = 0;
 		ItemMeta meta = item.getItemMeta();
-		for(int i = 0; i<meta.getLore().size();i++) {
-			if(meta.getLore().get(i).startsWith(this.sword.guclendirme)) {
-				this.sword.setItemPlus(Integer.parseInt(meta.getLore().get(i).substring(this.sword.guclendirme.length()-1).trim()));
-				//parse int inte cevirir. substring içindeki harfleri/kelimeleri atýyor. trim boþluklarý siliyor
-				this.hasPlus = true;
-				
+		for(String str:meta.getLore()) {
+			if(str.contains("Item id:")) {
+				str = str.concat("Item id:");
+				ids = Integer.parseInt(str.trim());}
+			else if(str.contains("Güçlendirme seviyesi:")) {
+				str = str.concat("Güçlendirme seviyesi:");
+				this.plus = Integer.parseInt(str.trim());}		
 			}
-			else if(meta.getLore().get(i).startsWith(this.sword.sýralama)) {
-				this.sword.setItemStageName(meta.getLore().get(i).substring(this.sword.sýralama.length()-1));
-				this.hasStageName = true;
-			}
-			else if(meta.getLore().get(i).startsWith(this.sword.kod)) {
-				this.sword.setId(Integer.parseInt(meta.getLore().get(i).substring(this.sword.kod.length()-1).trim()));
-				this.hasId = true;
-			}
-		}
-		if(this.hasId && this.hasPlus && this.hasStageName) {
-		ItemMeta meta1 = item.getItemMeta();
-		this.sword.setItemMeta(meta1);
-		this.sword.setItemMaterial(item.getType());
-		try {
-			this.sword.setCustomDamage(main.Main.swords.get(item.getType()).getBaseDamage());
-		}
-		catch(Exception e) {
-			this.sword.setCustomDamage(7);
-		}
-		this.sword.update();
-		
-		}
-		this.sword.addEnchantments(item.getEnchantments());
+		return ids;}
+	private CustomSword SyncItem(CustomSword first,ItemStack item) {
+		first.addEnchantments(item.getEnchantments());
+		first.setItemPlus(plus);
+		return first;
 		
 	}
-	private void DetectArmor(CustomArmor Armor) {/////Burada kaldýk
-		ItemStack item = this.stackitem;
-		ItemMeta meta = item.getItemMeta();
-		for(int i = 0; i<meta.getLore().size();i++) {
-			if(meta.getLore().get(i).startsWith(this.armor.guclendirme)) {
-				this.armor.setItemPlus(Integer.parseInt(meta.getLore().get(i).substring(this.armor.guclendirme.length()-1).trim()));
-				//parse int inte cevirir. substring içindeki harfleri/kelimeleri atýyor. trim boþluklarý siliyor
-				this.hasPlus = true;
-				
-			}
-			else if(meta.getLore().get(i).startsWith(this.armor.sýralama)) {
-				this.armor.setItemStageName(meta.getLore().get(i).substring(this.armor.sýralama.length()-1));
-				this.hasStageName = true;
-			}
-			else if(meta.getLore().get(i).startsWith(this.armor.kod)) {
-				this.armor.setId(Integer.parseInt(meta.getLore().get(i).substring(this.armor.kod.length()-1).trim()));
-				this.hasId = true;
-			}
-		}
-		if(this.hasId && this.hasPlus && this.hasStageName) {
-		ItemMeta meta1 = item.getItemMeta();
-		this.armor.setItemMeta(meta1);
-		this.armor.setItemMaterial(item.getType());
-		try {
-		this.armor.setCustomDeffence(main.Main.armors.get(item.getType()).getBaseDeffence());}
-		catch(Exception e){
-			this.armor.setCustomDeffence(1);
-			
-		}
-		this.armor.update();
-		
-		}
-		this.armor.addEnchantments(item.getEnchantments());
-		
+	private CustomArmor SyncItem(CustomArmor first,ItemStack item) {
+		first.addEnchantments(item.getEnchantments());
+		first.setItemPlus(plus);
+		return first;}
+	public CustomSword getSword() {
+		CustomSword sword = this.getCustomSword(this.id);
+		sword = this.SyncItem(sword, this.item);
+		return sword;		
 	}
-	
+	public CustomArmor getArmor() {
+		CustomArmor armor = this.getCustomArmor(this.id);
+		armor = this.SyncItem(armor, this.item);
+		return armor;
+	}
 	public boolean isCustomItem() {
-		if(this.hasId && this.hasPlus && this.hasStageName) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	public CustomSword getSword() { 
-		return this.sword;
-	}
-	public CustomArmor getArmor() { 
-		return this.armor;
+		return this.isCustom;
 	}
 	public String getType() {
 		return type;
 	}
-	public void setType(String type) {
-		this.type = type;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
 
 
 }

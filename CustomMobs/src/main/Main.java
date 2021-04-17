@@ -1,7 +1,6 @@
 package main;
 
 import java.util.HashMap;
-import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import Commands.AlchemyWindow;
@@ -10,18 +9,19 @@ import Commands.itemCommand;
 import Events.Events;
 import GameSystem.entityRegistry;
 import database.DBconnector;
+import items.CustomArmor;
+import items.CustomSword;
 import mobs.bossZombie;
 import net.minecraft.server.v1_16_R3.*;
 import settings.Stages;
-import settings.itemInfoForArmors;
-import settings.itemInfoForWeapons;
+
 
 public class Main extends JavaPlugin{
 	private static String DbUrl = "jdbc:mysql://185.26.147.184:3306/test";
 	private static String DbUserName = "root";
 	private static String Dbpassword = "cd1opBASx2zq6";
-	public static HashMap<Material,itemInfoForArmors> armors;// = new HashMap<Material,itemInfoForArmors>();
-	public static HashMap<Material, itemInfoForWeapons> swords;
+	public static HashMap<Integer,CustomSword> swords;// = new HashMap<Material,itemInfoForArmors>();
+	public static HashMap<Integer, CustomArmor> armors;
 	public static HashMap<Integer,Stages> stages;// = new HashMap<Material, itemInfoForWeapons>();
 	public static DBconnector DbConnection;
 	public entityRegistry reg = new entityRegistry();

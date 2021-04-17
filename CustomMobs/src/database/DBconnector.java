@@ -11,9 +11,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
+import items.CustomArmor;
+import items.CustomSword;
 import settings.Stages;
-import settings.itemInfoForArmors;
-import settings.itemInfoForWeapons;
 
 public class DBconnector {
 
@@ -56,8 +56,8 @@ public class DBconnector {
 		
 		
 	}
-	public HashMap<Material,itemInfoForArmors> getArmors() {
-		HashMap<Material,itemInfoForArmors> armors = new HashMap<Material,itemInfoForArmors>();
+	public HashMap<Integer,CustomArmor> getArmors() {
+		HashMap<Integer,CustomArmor> armors = new HashMap<Integer,CustomArmor>();
 
 		Connection conn = this.getConnection();
 		ResultSet result = null;
@@ -68,14 +68,17 @@ public class DBconnector {
 				while(result.next()) {
 					int id = result.getInt("id");
 					String serverName = result.getString("item_code");
-					int base = result.getInt("baseValue");
+					String name = result.getString("custom_name");
+					int baseValue = result.getInt("baseValue");
 					int plusLimit = result.getInt("maxPlus");
 					double perPlus = result.getDouble("perPlusIncrement");
 					int maxHp = result.getInt("maxHp");
 					String slotName = result.getString("slotName");
-					String name = result.getString("custom_name");
+					int CustomModel = result.getInt("CustomModel");
+					String desc = result.getString("description");
+					int stage = result.getInt("stage");
 					try {
-						armors.put(Material.valueOf(serverName), new itemInfoForArmors(Material.valueOf(serverName),id,base,plusLimit,perPlus,slotName,maxHp,name));
+						armors.put(id, new CustomArmor(id,Material.valueOf(serverName),name,baseValue,plusLimit,perPlus,maxHp,slotName,CustomModel,desc,stage));
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Zýrh listeye eklendi. id: "+id);
 					}
 					catch(Exception e) {
@@ -94,8 +97,8 @@ public class DBconnector {
 		}
 		return armors;
 		}
-	public HashMap<Material,itemInfoForWeapons> getSwords() {
-		HashMap<Material,itemInfoForWeapons> weapons = new HashMap<Material,itemInfoForWeapons>();
+	public HashMap<Integer,CustomSword> getSwords() {
+		HashMap<Integer,CustomSword> weapons = new HashMap<Integer,CustomSword>();
 
 		ResultSet result = null;
 		Connection conn = this.getConnection();
@@ -106,13 +109,17 @@ public class DBconnector {
 				while(result.next()) {
 					int id = result.getInt("id");
 					String serverName = result.getString("item_code");
-					int base = result.getInt("baseValue");
+					String name = result.getString("custom_name");
+					int baseValue = result.getInt("baseValue");
 					int plusLimit = result.getInt("maxPlus");
 					double perPlus = result.getDouble("perPlusIncrement");
-					String name = result.getString("custom_name");
+					String slotName = result.getString("slotName");
+					int CustomModel = result.getInt("CustomModel");
+					String desc = result.getString("description");
+					int stage = result.getInt("stage");
 					
 					try {
-						weapons.put(Material.valueOf(serverName), new itemInfoForWeapons(Material.valueOf(serverName),id,base,plusLimit,perPlus,name));
+						weapons.put(id, new CustomSword(id,Material.valueOf(serverName),name,baseValue,plusLimit,perPlus,slotName,CustomModel,desc,stage));
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Kýlýc listeye eklendi. id: "+id);
 					}
 					catch(Exception e) {

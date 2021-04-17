@@ -1,37 +1,60 @@
 package items;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class CustomArmor extends ItemsBase{
-	private int customDeffence = 1;
-
-	public int getCustomDeffence() {
-		return customDeffence;
-	}
-	public void setCustomDeffence(int customDeffence) {
-		this.customDeffence = customDeffence;
-	}
-	Material material = Material.LEATHER_HELMET;
-	int armorPlus = 0;//Ýtemin + derecesini gösterir. + derecesi attrýkça damageall enchant seviyesi artar
-	String armorName = "Custom Armor";//Eþyanýn temel adý
-
-
-	int id = 2;// eþyanýn idsi varsayýlan 1 yani 
-	String armorStageName ="Sýradan"; // Ýtem düzeyi item idsi ile deðiþecek þekilde ayarlanacak
-	String armorDesc = "Baslangýc icin güzel bir zýrh parcasý"; // Hawalý bir açýklama :D
-	int armorStageLevel = 1; // Stage level plus ile toplanýr ve enchant seviyesini attýrýr
-	public CustomArmor() {
+	
+	private int maxHp;
+	private int[] HpUUID;
+	private int[] DeffenceUUID;
+	public CustomArmor(int id,Material material,String CustomName,int baseValue,int maxPlus,double perPlus,int maxHp,String Slot,int CustomModel,String desc,int StageLevel) {
 
 		this.setId(id);
 		this.setAmount(1);		
-		this.setItemMaterial(this.material);
-		this.setItemName(armorName);
-		this.setItemPlus(armorPlus);
-		this.setId(id);
-		this.setItemDesc(armorDesc);
-		this.setItemStageName(armorStageName);
-		this.setItemStageLevel(armorStageLevel);
-		this.setCustomDeffence(main.Main.armors.get(this.material).getBaseDeffence()+this.getItemStageLevel()*3);
+		this.setType(material);
+		this.setCustomName(CustomName);	
+		this.setBaseValue(baseValue);
+		this.setMaxPlus(maxPlus);
+		this.setPerPlus(perPlus);
+		this.setMaxHp(maxHp);
+		this.setSlot(Slot);
+		ItemMeta meta = this.getItemMeta();meta.setCustomModelData(CustomModel);this.setItemMeta(meta);
+		this.setItemPlus(0);
+		this.setItemDesc(desc);
+		this.setItemStageName(main.Main.stages.get(StageLevel).getStageName());		
+		this.setItemStageLevel(StageLevel);	
 		this.update();
+		this.generateUUID(id);
 		
-}}
+}
+	private void generateUUID(int id) {
+		int[] def = {id*1000,id*1000,id*1000,id*1000};
+		int[] hp = {id*1500,id*1500,id*1500,id*1500};
+		this.setDeffenceUUID(def);
+		this.setHpUUID(hp);
+	}
+
+	public int getMaxHp() {
+		return maxHp;
+	}
+
+	public void setMaxHp(int maxHp) {
+		this.maxHp = maxHp;
+	}
+
+
+	public int[] getDeffenceUUID() {
+		return DeffenceUUID;
+	}
+
+	private void setDeffenceUUID(int[] deffenceUUID) {
+		DeffenceUUID = deffenceUUID;
+	}
+	public int[] getHpUUID() {
+		return HpUUID;
+	}
+
+	private void setHpUUID(int[] hpUUID) {
+		HpUUID = hpUUID;
+	}}
