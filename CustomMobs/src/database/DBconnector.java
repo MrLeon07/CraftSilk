@@ -78,7 +78,7 @@ public class DBconnector {
 					String desc = result.getString("description");
 					int stage = result.getInt("stage");
 					try {
-						armors.put(id, new CustomArmor(id,Material.valueOf(serverName),name,baseValue,plusLimit,perPlus,maxHp,slotName,CustomModel,desc,stage));
+						armors.put(id, new CustomArmor(id,Material.valueOf(serverName.toUpperCase()),name,baseValue,plusLimit,perPlus,maxHp,slotName,CustomModel,desc,stage));
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Zýrh listeye eklendi. id: "+id);
 					}
 					catch(Exception e) {
@@ -144,7 +144,7 @@ public class DBconnector {
 		return weapons;
 	}
 	public HashMap<Integer,Stages> getStages(){
-		HashMap<Integer,Stages> weapons = new HashMap<Integer,Stages>();
+		HashMap<Integer,Stages> stages = new HashMap<Integer,Stages>();
 
 		ResultSet result = null;
 		Connection conn = this.getConnection();
@@ -158,7 +158,7 @@ public class DBconnector {
 					int CustomModel = result.getInt("CustomModelCode");
 					
 					try {
-						weapons.put(StageLevel, new Stages(StageName, CustomModel));
+						stages.put(StageLevel, new Stages(StageName, CustomModel));
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Stage yüklendi. Name: "+StageName);
 					}
 					catch(Exception e) {
@@ -178,7 +178,7 @@ public class DBconnector {
 		}
 		
 		
-		return weapons;
+		return stages;
 	}
 
 }

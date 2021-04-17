@@ -103,6 +103,7 @@ public class ItemsBase extends ItemStack{
 		if(this.getType()!=null) {
 			this.setAmount(1);
 			ItemMeta meta =this.getItemMeta();
+			
 			meta.setLore(Arrays.asList(
 					this.guclendirme+this.getItemPlus(),"",
 					this.sýralama+this.getItemStageName().trim(),""
@@ -116,9 +117,9 @@ public class ItemsBase extends ItemStack{
 			
 		}}
 		catch(Exception e){
+			
 			System.out.println("Update Meta: "+this.getItemMeta());
-
-			System.out.println("Couldnt update lore item id:"+this.getId());
+			System.out.println("Couldnt update lore item id:"+this.getId()+" message: "+e.getMessage());
 		}
 		
 	}

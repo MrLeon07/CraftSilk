@@ -5,6 +5,8 @@ public class Stages {
 	private String StageName;
 	private int CustomModel;
 	public Stages(String StageName,int CustomModel) {
+		this.setStageName(StageName);
+		this.setCustomModel(CustomModel);
 		
 	}
 	

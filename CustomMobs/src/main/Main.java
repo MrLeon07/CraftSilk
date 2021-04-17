@@ -28,6 +28,7 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		LoadSettings();
+		
 		System.out.println("CraftSilk Plugini aktif edildi");
 		this.getCommand("cmonster").setExecutor(new commandEx());
 		this.getCommand("item").setExecutor(new itemCommand());
