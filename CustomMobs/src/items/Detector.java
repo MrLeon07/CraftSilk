@@ -28,10 +28,13 @@ public class Detector {
 		ItemMeta meta = item.getItemMeta();
 		for(String str:meta.getLore()) {
 			if(str.contains("Item id:")) {
-				str = str.concat("Item id:");
+				String target = String.copyValueOf("Item id:".toCharArray());
+				str = str.replace(target, "");
 				ids = Integer.parseInt(str.trim());}
 			else if(str.contains("Güçlendirme seviyesi:")) {
-				str = str.concat("Güçlendirme seviyesi:");
+				String target = String.copyValueOf("Güçlendirme seviyesi:".toCharArray());
+				str = str.replace(target, "");
+				System.out.println(str);
 				this.plus = Integer.parseInt(str.trim());}		
 			}
 		return ids;}
