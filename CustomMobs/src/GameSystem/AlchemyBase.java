@@ -7,6 +7,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import items.CustomArmor;
+import items.CustomStone;
 import items.CustomSword;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.minecraft.server.v1_16_R3.NBTTagList;
@@ -106,9 +107,7 @@ public class AlchemyBase {
 		deffence.setString("Name", "generic.armor");
 		deffence.setString("Slot", item.getSlot());
 		deffence.setInt("Operation", 0);
-		deffence.setDouble("Amount",item.getBaseValue()+item.getPerPlus()*item.getItemPlus());
-		
-		
+		deffence.setDouble("Amount",item.getBaseValue()+item.getPerPlus()*item.getItemPlus());	
 		deffence.setIntArray("UUID",item.getDeffenceUUID());
 		modifiers.add(deffence);
 		tag.set("AttributeModifiers", modifiers);
@@ -129,8 +128,6 @@ public class AlchemyBase {
 		deffence.setString("Slot", item.getSlot());
 		deffence.setInt("Operation", 0);
 		deffence.setDouble("Amount", (int) Math.random()*item.getMaxHp());
-		
-		
 		deffence.setIntArray("UUID",item.getHpUUID());
 		modifiers.add(deffence);
 		tag.set("AttributeModifiers", modifiers);
@@ -144,30 +141,23 @@ public class AlchemyBase {
 		
 	}
 	
-	public ItemStack addBlue(ItemStack Stone,ItemStack item) {
+	public ItemStack addBlue(CustomStone Stone,CustomSword item) {
 		
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);//nbt taglarý kopyala 
 		NBTTagCompound tag = nmsStack.getTag();
-		if(Stone.getType() == Material.GUNPOWDER) {//buradan aþaðýda enchler eklenir
+		if(Stone.getGenericData().equalsIgnoreCase("enchantment")) {//buradan aþaðýda enchler eklenir
 			try {
-				item.addEnchantment(Enchantment.KNOCKBACK,item.getEnchantmentLevel(Enchantment.KNOCKBACK)+1);
+				item.addEnchantment(Stone.getEnchantment(),item.getEnchantmentLevel(Stone.getEnchantment())+1);
 				
 				
-			} catch (Exception e) {System.out.println("savurma eklenemedi");}
+			} catch (Exception e) {System.out.println(Stone.getEnchantment().getName()+" Eklenemedi");}
 			
 		}
-		if(Stone.getType() == Material.SUGAR) {
-			try {
-				item.addEnchantment(Enchantment.SWEEPING_EDGE,item.getEnchantmentLevel(Enchantment.SWEEPING_EDGE)+1);
-				
-			} catch (Exception e) {System.out.println("süpürücü kenar eklenemedi");}
+		else {
+				System.out.println("Error on addBlue at Weapon");
 		}
-		if(Stone.getType() == Material.REDSTONE) {
-			try {
-				item.addEnchantment(Enchantment.FIRE_ASPECT,item.getEnchantmentLevel(Enchantment.FIRE_ASPECT)+1);
-				
-			} catch (Exception e) {System.out.println("Fire aspect eklenemedi");}
-		}
+		
+		
 		
 		nmsStack.setTag(tag);
 		ItemStack newStackedItem = CraftItemStack.asBukkitCopy(nmsStack);
@@ -177,5 +167,39 @@ public class AlchemyBase {
 		return newStackedItem;
 		
 	}
-
+public ItemStack addBlue(CustomStone Stone,CustomArmor item) {
+		
+		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);//nbt taglarý kopyala 
+		NBTTagCompound tag = nmsStack.getTag();
+		if(Stone.getGenericData().equalsIgnoreCase("enchantment")) {//buradan aþaðýda enchler eklenir
+			try {
+				item.addEnchantment(Stone.getEnchantment(),item.getEnchantmentLevel(Stone.getEnchantment())+1);
+				
+				
+			} catch (Exception e) {System.out.println(Stone.getEnchantment().getName()+" Eklenemedi");}
+			
+		}
+		else {
+			NBTTagList modifiers = new NBTTagList();
+			NBTTagCompound deffence = new NBTTagCompound();
+			deffence.setString("AttributeName", "generic.max_health");
+			deffence.setString("Name", "generic.max_health");
+			deffence.setString("Slot", item.getSlot());
+			deffence.setInt("Operation", 0);
+			deffence.setDouble("Amount", (int) Math.random()*item.getMaxHp());
+			deffence.setIntArray("UUID",item.getHpUUID());
+			modifiers.add(deffence);
+			tag.set("AttributeModifiers", modifiers);
+		}
+		
+		
+		
+		nmsStack.setTag(tag);
+		ItemStack newStackedItem = CraftItemStack.asBukkitCopy(nmsStack);
+		newStackedItem.addEnchantments(item.getEnchantments());//önceki enchleri yenilerine ekle
+		
+		
+		return newStackedItem;
+		
+	}
 }

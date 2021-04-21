@@ -1,10 +1,12 @@
 package GameSystem;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import items.CustomStone;
 import items.Detector;
 
 public class Alchemy extends AlchemyBase{
@@ -19,9 +21,12 @@ public class Alchemy extends AlchemyBase{
 		if(weapon != null && another != null && weapon.getType() != Material.AIR && another.getType() != Material.AIR) {
 			
 			Detector detItem = new Detector(item);
+			Detector detStone = new Detector(another);
 			
-				if(detItem.isCustomItem()) {
-				if(another.getType() == Material.GLOWSTONE_DUST) {
+				if(detItem.isCustomItem() && detStone.isCustomItem()) {
+					CustomStone stone = detStone.getStone();
+				if(stone.getGenericData().equalsIgnoreCase("upgrade")) {
+					
 					inv.setItem(11, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(12, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
 					inv.setItem(13, new ItemStack(Material.GREEN_STAINED_GLASS_PANE));
@@ -33,15 +38,19 @@ public class Alchemy extends AlchemyBase{
 					ItemStack newItem = this.incrasePlus(detItem.getSword());
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
-					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
+					stone.setAmount(stone.getAmount()-1);
+					inv.setItem(anotherslot,stone );}
 				else if(detItem.getType().equalsIgnoreCase("armor")) {
 					ItemStack newItem = this.incrasePlus(detItem.getArmor());
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
-					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}//itemsBase ver
+					stone.setAmount(stone.getAmount()-1);
+					inv.setItem(anotherslot,stone );//itemsBase ver
 					
 					}
-				else if(another.getType() == Material.REDSTONE || another.getType() == Material.SUGAR || another.getType() == Material.GUNPOWDER) {
+				else{player.sendMessage(ChatColor.AQUA+"<Alchemy>: "+ChatColor.RED+"Bu eþyayý güçlendiremezsin");				}
+				}
+				else {
 					inv.setItem(11, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(12, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(13, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
@@ -49,12 +58,24 @@ public class Alchemy extends AlchemyBase{
 					inv.setItem(15, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(22, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
 					inv.setItem(31, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
-					ItemStack newItem = this.addBlue(another,item);//itemstack ver
+					if(detItem.getType().equalsIgnoreCase("weapon")) {
+					ItemStack newItem = this.addBlue(stone,detItem.getSword());
 					inv.setItem(resultSlot, newItem);
 					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
-					inv.setItem(anotherslot, new ItemStack(another.getType(),another.getAmount()-1));}
+					stone.setAmount(stone.getAmount()-1);
+					inv.setItem(anotherslot,stone );}					
+					else if(detItem.getType().equalsIgnoreCase("armor")) {
+					ItemStack newItem = this.addBlue(stone,detItem.getArmor());
+					inv.setItem(resultSlot, newItem);
+					inv.setItem(weaponSlot, new ItemStack(Material.AIR,1));
+					stone.setAmount(stone.getAmount()-1);
+					inv.setItem(anotherslot,stone );}
+					else{ player.sendMessage(ChatColor.AQUA+"<Alchemy>:"+ChatColor.RED+" Bu eþya üzerinde deðiþiklik yapýlamaz");
+						}}
+					}
+					
 				}
 				else {
-					player.sendMessage("<SimyaSistemi>: Bu eþyayý güçlendiremezsin");
+					player.sendMessage(ChatColor.AQUA+"<Alchemy>:"+ChatColor.RED+" Eþya tanýnmadý. Yeniden oluþturulan eþyalar üzerinde simya kullanýlabilir.");
 					
-				}}}}}
+				}}}}

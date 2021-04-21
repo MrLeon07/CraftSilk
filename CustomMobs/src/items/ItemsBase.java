@@ -9,7 +9,7 @@ public class ItemsBase extends ItemStack{
 	
 	private int itemPlus = 0;//Ýtemin + derecesini gösterir. + derecesi attrýkça damageall enchant seviyesi artar
 	private String CustomName;;//Eþyanýn temel adý
-	
+	private String materialType;
 	private int id ;// eþyanýn idsi varsayýlan 1 yani 1. seviye kýlýç
 	private String ItemStageName; // Ýtem düzeyi item idsi ile deðiþecek þekilde ayarlanacak
 	private String ItemDesc; // Hawalý bir açýklama :D
@@ -93,9 +93,10 @@ public class ItemsBase extends ItemStack{
 	public final String guclendirme = "Güçlendirme seviyesi: ";
 	public final String sýralama = "Item sýralamasý: ";
 	public final String kod ="Item id: ";
+	public final String type = "Item Type: ";
 	//----------------------------Getter,Setter--------------------------------
 	//----------------------------Update----------------------------------
-	public final void update() {
+	public void update() {
 		try {		
 			
 			
@@ -107,7 +108,7 @@ public class ItemsBase extends ItemStack{
 			meta.setLore(Arrays.asList(
 					this.guclendirme+this.getItemPlus(),"",
 					this.sýralama+this.getItemStageName().trim(),""
-					,"","",this.getItemDesc(),this.kod+this.getId()));
+					,"",this.type+this.materialType,this.getItemDesc(),this.kod+this.getId()));
 			meta.setDisplayName(getCustomName());
 			
 			this.setItemMeta(meta); //Metayý iteme aktarýyor
@@ -126,6 +127,12 @@ public class ItemsBase extends ItemStack{
 	//--------------------------------Plus--------------------------
 	//Ýmmutable maps ile ilgili sorun var enchantlarý düzelt sonrasýnda + basma sistemi tamamdýr. 
 	// ardýndan item yükseltme sistemine geç ya da + basma itemi iþine gir
+	public String getMaterialType() {
+		return materialType;
+	}
+	public void setMaterialType(String materialType) {
+		this.materialType = materialType;
+	}
 
 	
 	//Her iþlemden sonra update at ki iþlemler eþyaya geçsin.

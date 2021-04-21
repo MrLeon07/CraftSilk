@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
 import items.CustomArmor;
+import items.CustomStone;
 import items.CustomSword;
 import settings.Stages;
 
@@ -77,8 +78,9 @@ public class DBconnector {
 					int CustomModel = result.getInt("CustomModel");
 					String desc = result.getString("description");
 					int stage = result.getInt("stage");
+					String type = result.getString("type");
 					try {
-						armors.put(id, new CustomArmor(id,Material.valueOf(serverName.toUpperCase()),name,baseValue,plusLimit,perPlus,maxHp,slotName,CustomModel,desc,stage));
+						armors.put(id, new CustomArmor(id,Material.valueOf(serverName.toUpperCase()),name,baseValue,plusLimit,perPlus,maxHp,slotName,CustomModel,desc,stage,type));
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Zýrh listeye eklendi. id: "+id);
 					}
 					catch(Exception e) {
@@ -117,9 +119,10 @@ public class DBconnector {
 					int CustomModel = result.getInt("CustomModel");
 					String desc = result.getString("description");
 					int stage = result.getInt("stage");
+					String type = result.getString("type");
 					
 					try {
-						weapons.put(id, new CustomSword(id,Material.valueOf(serverName.toUpperCase()),name,baseValue,plusLimit,perPlus,slotName,CustomModel,desc,stage));
+						weapons.put(id, new CustomSword(id,Material.valueOf(serverName.toUpperCase()),name,baseValue,plusLimit,perPlus,slotName,CustomModel,desc,stage,type));
 						
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Kýlýc listeye eklendi. id: "+id);
 					}
@@ -180,5 +183,48 @@ public class DBconnector {
 		
 		return stages;
 	}
+	public HashMap<Integer,CustomStone> getStones(){
+		HashMap<Integer,CustomStone> Stones = new HashMap<Integer,CustomStone>();
 
+		ResultSet result = null;
+		Connection conn = this.getConnection();
+		try {
+			Statement state = conn.createStatement();
+			result = state.executeQuery("select * from customstone");
+			try {
+				while(result.next()) {
+					int id = result.getInt("id");
+					String CustomName = result.getString("customName");
+					String serverName = result.getString("serverName");
+					int CustomModel = result.getInt("customModel");
+					String generic = result.getString("genericData");
+					String Enchantment = result.getString("enchantment");
+					String effective = result.getString("effectiveType");
+					String desc = result.getString("description");
+					String Type = result.getString("type");
+					
+					try {
+						Stones.put(id, new CustomStone(id, Material.valueOf(serverName), CustomName, CustomModel, generic, Enchantment, effective, desc, Type));
+						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Stone yüklendi. Name: "+CustomName);
+						
+					}
+					catch(Exception e) {
+						System.out.println("<Generator> Stone yüklenemedi. Name: "+CustomName+" Stone id: "+id);					
+					}
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		} catch (SQLException e) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"<Database> "+ChatColor.DARK_PURPLE+"Stone verileri alýnamadý. Error message: "+e.getMessage());
+		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"<Database> GetStones conn.close: "+e.getMessage());
+		}
+		
+		
+		return Stones;
+	}
 }

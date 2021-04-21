@@ -10,6 +10,7 @@ import Events.Events;
 import GameSystem.entityRegistry;
 import database.DBconnector;
 import items.CustomArmor;
+import items.CustomStone;
 import items.CustomSword;
 import mobs.bossZombie;
 import net.minecraft.server.v1_16_R3.*;
@@ -23,6 +24,7 @@ public class Main extends JavaPlugin{
 	public static HashMap<Integer,CustomSword> swords;// = new HashMap<Material,itemInfoForArmors>();
 	public static HashMap<Integer, CustomArmor> armors;
 	public static HashMap<Integer,Stages> stages;// = new HashMap<Material, itemInfoForWeapons>();
+	public static HashMap<Integer,CustomStone> stones;
 	public static DBconnector DbConnection;
 	public entityRegistry reg = new entityRegistry();
 	@Override
@@ -54,11 +56,15 @@ public class Main extends JavaPlugin{
 		if(stages!=null) {
 			stages.clear();
 		}
+		if(stones !=null) {
+			stones.clear();
+		}
 		DbConnection = new DBconnector(DbUrl,DbUserName,Dbpassword);
 		if(DbConnection.tryConnect()) {
 		stages = DbConnection.getStages();
 		armors = DbConnection.getArmors();
 		swords = DbConnection.getSwords();
+		stones = DbConnection.getStones();
 	
 		System.out.println("<Database> Verileri alýmý tamamlandý.");}
 		else {

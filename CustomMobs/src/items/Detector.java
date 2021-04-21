@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class Detector {
 	boolean isCustom = false;
 	public String type = "None";
+	public String materialType;
 	private int plus = 0;
 	int id = 0;
 	private ItemStack item = null;
@@ -16,8 +17,19 @@ public class Detector {
 		this.item = item;
 		id = this.findId(item);
 		if(id>0) {
-			if(main.Main.armors.containsKey(id)) {this.type = "armor";this.isCustom=true;}
-			else if(main.Main.swords.containsKey(id)) {this.type = "weapon";this.isCustom=true;}
+			if(this.type =="Item") {
+				if(main.Main.armors.containsKey(id)) {this.type = "armor";this.isCustom=true;}
+				else if(main.Main.swords.containsKey(id)) {this.type = "weapon";this.isCustom=true;}
+				else {this.isCustom = false;}
+			}
+			else if(this.type == "Stone") {
+				if(main.Main.stones.containsKey(id)) {this.type = "stone";this.isCustom=true;}
+				else {this.isCustom = false;}
+			}
+			else if(this.type=="Scroll") {
+				this.isCustom=true;
+			}
+			
 			else {this.isCustom = false;}}
 		else {this.isCustom=false;}
 	}
@@ -35,7 +47,12 @@ public class Detector {
 				String target = String.copyValueOf("Güçlendirme seviyesi:".toCharArray());
 				str = str.replace(target, "");
 				System.out.println(str);
-				this.plus = Integer.parseInt(str.trim());}		
+				this.plus = Integer.parseInt(str.trim());}
+			else if(str.contains("Item Type:")) {
+				String target = String.copyValueOf("Item Type:".toCharArray());
+				str = str.replace(target, "");
+				this.materialType = str.trim();
+				}
 			}
 		return ids;}
 	private CustomSword SyncItem(CustomSword first,ItemStack item) {
@@ -48,6 +65,11 @@ public class Detector {
 		first.addEnchantments(item.getEnchantments());
 		first.setItemPlus(plus);
 		return first;}
+	public CustomStone getStone() {
+		CustomStone stone = main.Main.stones.get(this.id);
+		stone.setAmount(this.item.getAmount());
+		return stone;
+	}
 	public CustomSword getSword() {
 		CustomSword sword = this.getCustomSword(this.id);
 		sword = this.SyncItem(sword, this.item);
@@ -65,7 +87,4 @@ public class Detector {
 		return type;
 	}
 	
-	
-
-
 }

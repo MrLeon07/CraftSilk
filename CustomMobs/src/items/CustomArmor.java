@@ -8,8 +8,8 @@ public class CustomArmor extends ItemsBase{
 	private int maxHp;
 	private int[] HpUUID;
 	private int[] DeffenceUUID;
-	public CustomArmor(int id,Material material,String CustomName,int baseValue,int maxPlus,double perPlus,int maxHp,String Slot,int CustomModel,String desc,int StageLevel) {
-
+	public CustomArmor(int id,Material material,String CustomName,int baseValue,int maxPlus,double perPlus,int maxHp,String Slot,int CustomModel,String desc,int StageLevel,String type) {
+		this.setMaterialType(type);
 		this.setId(id);
 		this.setAmount(1);		
 		this.setType(material);
