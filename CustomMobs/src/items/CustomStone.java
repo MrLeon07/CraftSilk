@@ -1,5 +1,6 @@
 package items;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.Material;
@@ -16,7 +17,14 @@ public class CustomStone extends ItemsBase{
 		this.setEffectives(effectiveTypes);
 		this.setGenericData(genericData);
 		if(genericData.equalsIgnoreCase("enchantment")) {
-			this.setEnchantment(Enchantment.getByName(EnchName));
+			try{
+				EnchName=EnchName.toUpperCase();
+				this.setEnchantment(Enchantment.getByName(EnchName));
+			}catch(Exception e) {
+				System.out.println("Ilgili büyü bulunamadý. Lütfen kontrol ediniz!!!!! id:"+id);
+				
+			}
+			
 		}
 		else {
 			this.enchantment = null;
@@ -65,9 +73,15 @@ public class CustomStone extends ItemsBase{
 		try {
 			if(this.getType()!=null) {
 				this.setAmount(1);
-				ItemMeta meta =this.getItemMeta();				
-				meta.setLore(Arrays.asList(
-						this.type+this.getMaterialType(),"","Etki eder: "+this.getEffectives(),this.getItemDesc(),this.kod+this.getId()));
+				ItemMeta meta =this.getItemMeta();
+				ArrayList<String[]> lores = new ArrayList<String[]>();
+				String[] lore1 = {this.type+this.getMaterialType(),"","Etki eder: "+this.getEffectives()};
+				String[] lore2 = this.getLimitedArray(10, this.getItemDesc());
+				String[] lore3 = {this.kod+this.getId()};
+				lores.add(lore1);lores.add(lore2);lores.add(lore3);		
+				
+				meta.setLore(Arrays.asList(this.getComplatedList(lores)));
+				lores = null;lore1=null;lore2=null;lore3=null;				
 				meta.setDisplayName(getCustomName());				
 				this.setItemMeta(meta); //Metayý iteme aktarýyor	
 			}}

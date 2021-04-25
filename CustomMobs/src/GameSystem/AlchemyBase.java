@@ -1,11 +1,11 @@
 package GameSystem;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
-import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import customExceptions.AlchemyPlusLimitException;
 import items.CustomArmor;
 import items.CustomStone;
 import items.CustomSword;
@@ -67,12 +67,11 @@ public class AlchemyBase {
 		Bukkit.broadcastMessage(item.getEnchantments().toString());
 		return new_item;
 	}
-	public ItemStack incrasePlus(CustomSword item) {
-		if(item.getItemPlus()<item.getMaxPlus()) {
-		item.setItemPlus(item.getItemPlus()+1);}
-		else {
-			System.out.println("Güçlendirme yapýlamadý");
-		}
+	public ItemStack incrasePlus(CustomSword item) throws AlchemyPlusLimitException {
+		item.setItemPlus(item.getItemPlus()+1);
+		
+		if(item.getItemPlus()>item.getMaxPlus()) {
+		throw new AlchemyPlusLimitException("PlusLimit");}
 	
 		
 		item.update();
@@ -95,9 +94,11 @@ public class AlchemyBase {
 		new_item.addEnchantments(item.getEnchantments());
 		return new_item;
 	}
-	public ItemStack incrasePlus(CustomArmor item) {
-		if(item.getItemPlus()<item.getMaxPlus()) {
-		item.setItemPlus(item.getItemPlus()+1);}
+	public ItemStack incrasePlus(CustomArmor item) throws AlchemyPlusLimitException {
+		item.setItemPlus(item.getItemPlus()+1);
+		
+		if(item.getItemPlus()>item.getMaxPlus()) {
+		throw new AlchemyPlusLimitException("PlusLimit");}
 		item.update();
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound tag = nmsStack.getOrCreateTag();
@@ -141,6 +142,7 @@ public class AlchemyBase {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public ItemStack addBlue(CustomStone Stone,CustomSword item) {
 		
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);//nbt taglarý kopyala 
@@ -167,7 +169,8 @@ public class AlchemyBase {
 		return newStackedItem;
 		
 	}
-public ItemStack addBlue(CustomStone Stone,CustomArmor item) {
+@SuppressWarnings("deprecation")
+	public ItemStack addBlue(CustomStone Stone,CustomArmor item) {
 		
 		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);//nbt taglarý kopyala 
 		NBTTagCompound tag = nmsStack.getTag();
@@ -201,5 +204,10 @@ public ItemStack addBlue(CustomStone Stone,CustomArmor item) {
 		
 		return newStackedItem;
 		
+	}
+	public void fillWithItems(Inventory inventory,int[] slots,ItemStack item) {
+		for(int i = 0;i<slots.length;i++) {
+			inventory.setItem(slots[i],item);		
+		}
 	}
 }

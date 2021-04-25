@@ -17,16 +17,17 @@ public class Detector {
 		this.item = item;
 		id = this.findId(item);
 		if(id>0) {
-			if(this.type =="Item") {
+			System.out.println(this.materialType);
+			if(this.materialType.equalsIgnoreCase("Item")) {
 				if(main.Main.armors.containsKey(id)) {this.type = "armor";this.isCustom=true;}
 				else if(main.Main.swords.containsKey(id)) {this.type = "weapon";this.isCustom=true;}
 				else {this.isCustom = false;}
 			}
-			else if(this.type == "Stone") {
+			else if(this.materialType.equalsIgnoreCase( "Stone")) {
 				if(main.Main.stones.containsKey(id)) {this.type = "stone";this.isCustom=true;}
 				else {this.isCustom = false;}
 			}
-			else if(this.type=="Scroll") {
+			else if(this.materialType.equalsIgnoreCase("Scroll")) {
 				this.isCustom=true;
 			}
 			
@@ -46,9 +47,9 @@ public class Detector {
 			else if(str.contains("Güçlendirme seviyesi:")) {
 				String target = String.copyValueOf("Güçlendirme seviyesi:".toCharArray());
 				str = str.replace(target, "");
-				System.out.println(str);
 				this.plus = Integer.parseInt(str.trim());}
 			else if(str.contains("Item Type:")) {
+				
 				String target = String.copyValueOf("Item Type:".toCharArray());
 				str = str.replace(target, "");
 				this.materialType = str.trim();
@@ -56,17 +57,19 @@ public class Detector {
 			}
 		return ids;}
 	private CustomSword SyncItem(CustomSword first,ItemStack item) {
+		first = (CustomSword) first.clone();
 		first.addEnchantments(item.getEnchantments());
 		first.setItemPlus(plus);
 		return first;
 		
 	}
 	private CustomArmor SyncItem(CustomArmor first,ItemStack item) {
+		first = (CustomArmor) first.clone();
 		first.addEnchantments(item.getEnchantments());
 		first.setItemPlus(plus);
 		return first;}
 	public CustomStone getStone() {
-		CustomStone stone = main.Main.stones.get(this.id);
+		CustomStone stone = (CustomStone) main.Main.stones.get(this.id).clone();
 		stone.setAmount(this.item.getAmount());
 		return stone;
 	}

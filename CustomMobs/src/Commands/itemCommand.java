@@ -23,12 +23,12 @@ public class itemCommand implements CommandExecutor{
 					if(args[0].equalsIgnoreCase("item")) {
 						try {int id = Integer.parseInt(args[1]);
 						if(main.Main.armors.containsKey(id)) {
-							CustomArmor armor = main.Main.armors.get(id);
+							CustomArmor armor = (CustomArmor) main.Main.armors.get(id).clone();
 							player.getLocation().getWorld().dropItem(player.getLocation(),armor);
 							player.sendMessage(ChatColor.AQUA+"<Game>: "+ChatColor.GREEN+"Eþya düþürüldü. Eþya adý: "+armor.getCustomName());
 						}
 						else if(main.Main.swords.containsKey(id)) {
-							CustomSword sword = main.Main.swords.get(id);
+							CustomSword sword = (CustomSword) main.Main.swords.get(id).clone();
 							player.getLocation().getWorld().dropItem(player.getLocation(),sword);
 							player.sendMessage(ChatColor.AQUA+"<Game>: "+ChatColor.GREEN+"Eþya düþürüldü. Eþya adý: "+sword.getCustomName());
 						}
@@ -40,7 +40,7 @@ public class itemCommand implements CommandExecutor{
 						try {
 							int id= Integer.parseInt(args[1]);
 							if(main.Main.stones.containsKey(id)) {
-								CustomStone stone = main.Main.stones.get(id);
+								CustomStone stone = (CustomStone) main.Main.stones.get(id).clone();
 								player.getLocation().getWorld().dropItem(player.getLocation(),stone);
 								player.sendMessage(ChatColor.AQUA+"<Game>: "+ChatColor.GREEN+"Eþya düþürüldü. Eþya adý: "+stone.getCustomName());
 							}

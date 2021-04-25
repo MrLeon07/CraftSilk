@@ -202,14 +202,14 @@ public class DBconnector {
 					String effective = result.getString("effectiveType");
 					String desc = result.getString("description");
 					String Type = result.getString("type");
-					
 					try {
-						Stones.put(id, new CustomStone(id, Material.valueOf(serverName), CustomName, CustomModel, generic, Enchantment, effective, desc, Type));
+						Stones.put(id, new CustomStone(id, Material.valueOf(serverName.toUpperCase()), CustomName, CustomModel, generic, Enchantment, effective, desc, Type));
 						Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Stone yüklendi. Name: "+CustomName);
 						
 					}
 					catch(Exception e) {
-						System.out.println("<Generator> Stone yüklenemedi. Name: "+CustomName+" Stone id: "+id);					
+						System.out.println("<Generator> Stone yüklenemedi. Name: "+CustomName+" Stone id: "+id);
+						e.printStackTrace();
 					}
 				}
 			} catch (SQLException e) {

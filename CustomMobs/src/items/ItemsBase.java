@@ -1,5 +1,6 @@
 package items;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -104,11 +105,14 @@ public class ItemsBase extends ItemStack{
 		if(this.getType()!=null) {
 			this.setAmount(1);
 			ItemMeta meta =this.getItemMeta();
-			
-			meta.setLore(Arrays.asList(
-					this.guclendirme+this.getItemPlus(),"",
-					this.sýralama+this.getItemStageName().trim(),""
-					,"",this.type+this.materialType,this.getItemDesc(),this.kod+this.getId()));
+			ArrayList<String[]> lores = new ArrayList<String[]>();
+			String[] lore1 = {this.guclendirme+this.getItemPlus(),"",this.sýralama+this.getItemStageName().trim(),""
+					,"",this.type+this.materialType};
+			String[] lore2 = this.getLimitedArray(10, this.getItemDesc());
+			String[] lore3 = {this.kod+this.getId()};
+			lores.add(lore1);lores.add(lore2);lores.add(lore3);
+			meta.setLore(Arrays.asList(this.getComplatedList(lores)));
+			lores=null;lore1=null;lore2=null;lore3=null;
 			meta.setDisplayName(getCustomName());
 			
 			this.setItemMeta(meta); //Metayý iteme aktarýyor
@@ -134,6 +138,33 @@ public class ItemsBase extends ItemStack{
 		this.materialType = materialType;
 	}
 
+	public String[] getLimitedArray(int Limit,String string) {
+		String[] list = string.split(" ");
+		ArrayList<String> lore = new ArrayList<String>();
+		String str ="";
+		for(int i = 0;i<list.length;i++) {
+			str+=list[i]+" ";
+			if(str.length()>Limit) {
+				lore.add(str.trim());
+				str = "";}}
+		lore.add(str);
+		String loreas = "";
+		for(String a: lore) {loreas+=a+"%%%";}
+		return loreas.split("%%%");
+	}
+	public String[] getComplatedList(ArrayList<String[]> StringList) {
+		int size = 0;
+		for(String[] array:StringList) {size+=array.length;}
+		String[] lastList = new String[size];
+		int index = 0;
+		for(String[] array:StringList) {
+			for(int i =0;i<array.length;i++) {
+				lastList[index] = array[i];
+				index++;
+			}
+		}
+		return lastList;
+	}
 	
 	//Her iþlemden sonra update at ki iþlemler eþyaya geçsin.
 
