@@ -8,12 +8,19 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import GameSystem.Alchemy;
+import Inventories.AdminItemsWindow;
+import inventoryPages.IPage;
 
 public class Events implements Listener{
-
+	
+	public Events() {
+		
+	}
 	@EventHandler
+
 	public void BlocPlaceEvent(InventoryClickEvent e) {
 		if(e != null && e.getInventory() != null) {
 		Player player = (Player) e.getWhoClicked();
@@ -49,8 +56,41 @@ public class Events implements Listener{
 			
 		}
 		
-	}}
-
+	}
+	@EventHandler
+	public void InventoryClick(InventoryClickEvent e) {
+		AdminItemsWindow adminPage = new AdminItemsWindow();
+		if(e != null && e.getInventory() != null) {
+		Player player = (Player) e.getWhoClicked();
+		InventoryView view = player.getOpenInventory();
+		if(adminPage.PageNames.containsKey(view.getTitle())) {
+			IPage page = adminPage.Pages.get(adminPage.PageNames.get(view.getTitle()));
+			e.setCancelled(true);
+			ItemStack item = e.getCurrentItem();
+			if(item.getType().equals(Material.ARROW)) {
+				ItemMeta arrowMeta = item.getItemMeta();
+				if(arrowMeta.getDisplayName().equalsIgnoreCase("<- Önceki Sayfa")) {
+					int pageNumber = page.getPageNumber();
+					if(adminPage.Pages.containsKey(pageNumber-1)) {
+						IPage nextPage = adminPage.Pages.get(pageNumber-1);
+						player.closeInventory();
+						player.openInventory(nextPage.create(player));
+					}
+				}
+				else if(arrowMeta.getDisplayName().equalsIgnoreCase("Sonraki sayfa ->")) {
+					int pageNumber = page.getPageNumber();
+					if(adminPage.Pages.containsKey(pageNumber+1)) {
+						IPage nextPage = adminPage.Pages.get(pageNumber+1);
+						player.closeInventory();
+						player.openInventory(nextPage.create(player));}}}
+			else if(item.getType().equals(Material.PAPER) || item.getType().equals(Material.GREEN_STAINED_GLASS_PANE)){}
+			else {if(player.isOp()) {
+				player.getInventory().addItem(e.getCurrentItem().clone());
+			}
+			}
+			}}
+		
+	}
 	
-
+}
 

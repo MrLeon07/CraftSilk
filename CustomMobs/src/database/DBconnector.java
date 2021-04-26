@@ -5,12 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
+import customExceptions.ValueErrorException;
 import items.CustomArmor;
 import items.CustomStone;
 import items.CustomSword;
@@ -59,7 +61,6 @@ public class DBconnector {
 	}
 	public HashMap<Integer,CustomArmor> getArmors() {
 		HashMap<Integer,CustomArmor> armors = new HashMap<Integer,CustomArmor>();
-
 		Connection conn = this.getConnection();
 		ResultSet result = null;
 		try {
@@ -98,6 +99,7 @@ public class DBconnector {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"<Database> GetArmors conn.close: "+e.getMessage());
 		}
 		return armors;
+		
 		}
 	public HashMap<Integer,CustomSword> getSwords() {
 		HashMap<Integer,CustomSword> weapons = new HashMap<Integer,CustomSword>();
@@ -226,5 +228,44 @@ public class DBconnector {
 		
 		
 		return Stones;
+	}
+	public ArrayList<Integer> getAdminCommandItems(String Type) throws ValueErrorException {
+		try {
+			Material.valueOf(Type.toUpperCase());
+		}
+		catch(Exception e) {
+			throw new ValueErrorException("Hatalý Deðer");
+			
+		}
+		Connection conn = this.getConnection();
+
+		ArrayList<Integer> idList= new ArrayList<Integer>();
+		ResultSet result = null;
+		Statement state;
+		try {
+			state = conn.createStatement();
+		
+			result = state.executeQuery("select id from customitems where item_code = '"+Type.toLowerCase()+"'");
+			
+				while(result.next()) {
+					int id = result.getInt("id");
+					idList.add(id);
+					
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		
+		
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_PURPLE+"<Database> Admin items conn.close: "+e.getMessage());
+		}
+		return idList;
+		
+		
+		
 	}
 }

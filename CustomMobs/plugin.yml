@@ -10,3 +10,5 @@ commands:
       description: Klasik kilic verir
    simya:
       description: Simya penceresini acar
+   admin:
+      description: Esyalar penceresini acar

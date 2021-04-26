@@ -4,6 +4,7 @@ import java.util.HashMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import Commands.AlchemyWindow;
+import Commands.adminCommand;
 import Commands.commandEx;
 import Commands.itemCommand;
 import Events.Events;
@@ -25,6 +26,7 @@ public class Main extends JavaPlugin{
 	public static HashMap<Integer, CustomArmor> armors;
 	public static HashMap<Integer,Stages> stages;// = new HashMap<Material, itemInfoForWeapons>();
 	public static HashMap<Integer,CustomStone> stones;
+
 	public static DBconnector DbConnection;
 	public entityRegistry reg = new entityRegistry();
 	@Override
@@ -35,6 +37,7 @@ public class Main extends JavaPlugin{
 		this.getCommand("cmonster").setExecutor(new commandEx());
 		this.getCommand("item").setExecutor(new itemCommand());
 		this.getCommand("simya").setExecutor(new AlchemyWindow());
+		this.getCommand("admin").setExecutor(new adminCommand());
 		reg.registerEntity("Zombie", 54, EntityZombie.class, bossZombie.class);
 		this.getServer().getPluginManager().registerEvents(new Events(), this);
 		
