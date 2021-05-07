@@ -119,6 +119,9 @@ public class Events implements Listener{
 					e.setDamage(0);
 				}
 			}
+			else {
+				e.setDamage(damage-totalDeffence);
+			}
 			
 			
 		}
