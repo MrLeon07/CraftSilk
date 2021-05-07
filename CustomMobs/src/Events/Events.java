@@ -1,9 +1,13 @@
 package Events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -16,12 +20,10 @@ import inventoryPages.IPage;
 
 public class Events implements Listener{
 	
-	public Events() {
-		
-	}
+	
 	@EventHandler
 
-	public void BlocPlaceEvent(InventoryClickEvent e) {
+	public void InventoryClick2(InventoryClickEvent e) {
 		if(e != null && e.getInventory() != null) {
 		Player player = (Player) e.getWhoClicked();
 		InventoryView invView = player.getOpenInventory();
@@ -38,12 +40,8 @@ public class Events implements Listener{
 				player.sendMessage("Simya basladý");
 				Alchemy alc = new Alchemy();
 				alc.StartAlchemy(inv,player);
-				
-				
 				e.setCancelled(true);
-				//asdasdasd}
 				
-			
 			}
 			else if(item.getType() == Material.RED_DYE) {
 				player.sendMessage("Bu özellik henüz aktif deðil.");
@@ -91,6 +89,39 @@ public class Events implements Listener{
 			}}
 		
 	}
-	
+	@EventHandler
+	public void DamageEvent(EntityDamageByEntityEvent e) {
+		
+		if(e.getEntity() instanceof Player) {
+			
+			Player player = (Player) e.getEntity();
+			double damage = e.getDamage();
+			double totalDeffence = 0.0;
+			for (ItemStack item : player.getInventory().getArmorContents()) {
+				if(item != null) {
+					ItemMeta meta = item.getItemMeta();
+					try {
+					for (AttributeModifier modifier : meta.getAttributeModifiers(Attribute.GENERIC_ARMOR)) {
+						totalDeffence += modifier.getAmount();}}
+					catch(Exception exc) {
+						
+					}
+					}}
+			Bukkit.getServer().broadcastMessage("Damage = "+damage+" defans = "+totalDeffence);
+			if(damage < totalDeffence) {
+				double chance = Math.random();
+				double value = damage/totalDeffence;
+				Bukkit.getServer().broadcastMessage("value = "+(int)(value*100)+" chance = "+(int)(chance*100));
+
+				if(chance<value) {
+					e.setDamage(0.5);
+				}else {
+					e.setDamage(0);
+				}
+			}
+			
+			
+		}
+	}
 }
 
