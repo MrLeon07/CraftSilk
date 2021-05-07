@@ -1,7 +1,12 @@
 package items;
 
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import net.minecraft.server.v1_16_R3.NBTTagCompound;
+import net.minecraft.server.v1_16_R3.NBTTagList;
 
 public class CustomArmor extends ItemsBase{
 	
@@ -57,4 +62,21 @@ public class CustomArmor extends ItemsBase{
 
 	private void setHpUUID(int[] hpUUID) {
 		HpUUID = hpUUID;
+	}
+	public ItemStack getItem() {
+		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(this);
+		NBTTagCompound tag = nmsStack.getOrCreateTag();
+		NBTTagList modifiers = new NBTTagList();
+		NBTTagCompound deffence = new NBTTagCompound();
+		deffence.setString("AttributeName", "generic.armor");
+		deffence.setString("Name", "generic.armor");
+		deffence.setString("Slot", this.getSlot());
+		deffence.setInt("Operation", 0);
+		deffence.setDouble("Amount",this.getBaseValue()+this.getPerPlus()*this.getItemPlus());	
+		deffence.setIntArray("UUID",this.getDeffenceUUID());
+		modifiers.add(deffence);
+		tag.set("AttributeModifiers", modifiers);
+		nmsStack.setTag(tag);
+		ItemStack new_item = CraftItemStack.asBukkitCopy(nmsStack);
+		return new_item;
 	}}

@@ -100,23 +100,8 @@ public class AlchemyBase {
 		if(item.getItemPlus()>item.getMaxPlus()) {
 		throw new AlchemyPlusLimitException("PlusLimit");}
 		item.update();
-		net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
-		NBTTagCompound tag = nmsStack.getOrCreateTag();
-		NBTTagList modifiers = new NBTTagList();
-		NBTTagCompound deffence = new NBTTagCompound();
-		deffence.setString("AttributeName", "generic.armor");
-		deffence.setString("Name", "generic.armor");
-		deffence.setString("Slot", item.getSlot());
-		deffence.setInt("Operation", 0);
-		deffence.setDouble("Amount",item.getBaseValue()+item.getPerPlus()*item.getItemPlus());	
-		deffence.setIntArray("UUID",item.getDeffenceUUID());
-		modifiers.add(deffence);
-		tag.set("AttributeModifiers", modifiers);
-		nmsStack.setTag(tag);
-		ItemStack new_item = CraftItemStack.asBukkitCopy(nmsStack);
-		System.out.println(item.getEnchantments());
+		ItemStack new_item = item.getItem();
 		new_item.addEnchantments(item.getEnchantments());
-		Bukkit.broadcastMessage(item.getEnchantments().toString());
 		return new_item;
 	}
 	public ItemStack AddMaxHealthBlue(CustomArmor item) {

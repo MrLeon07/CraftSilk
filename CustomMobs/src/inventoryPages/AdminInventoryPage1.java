@@ -82,10 +82,10 @@ public class AdminInventoryPage1 implements IPage{
 			rightArrowMeta.setDisplayName("Sonraki sayfa ->");
 			rightPageArrow.setItemMeta(rightArrowMeta);
 			leftPageArrow.setItemMeta(leftArrowMeta);
-			for(int i = 0;i<9;i++) {this.inv.setItem(i, main.Main.armors.get(helmets.get(i)).clone());}
-			for(int i = 9;i<18;i++) {this.inv.setItem(i, main.Main.armors.get(chestPlates.get(i-9)).clone());}
-			for(int i = 18;i<27;i++) {this.inv.setItem(i, main.Main.armors.get(leggings.get(i-18)).clone());}
-			for(int i = 27;i<36;i++) {this.inv.setItem(i, main.Main.armors.get(boots.get(i-27)).clone());}
+			for(int i = 0;i<9;i++) {this.inv.setItem(i, main.Main.armors.get(helmets.get(i)).getItem().clone());}
+			for(int i = 9;i<18;i++) {this.inv.setItem(i, main.Main.armors.get(chestPlates.get(i-9)).getItem().clone());}
+			for(int i = 18;i<27;i++) {this.inv.setItem(i, main.Main.armors.get(leggings.get(i-18)).getItem().clone());}
+			for(int i = 27;i<36;i++) {this.inv.setItem(i, main.Main.armors.get(boots.get(i-27)).getItem().clone());}
 			for(int i = 36;i<45;i++) {this.inv.setItem(i, main.Main.swords.get(swords.get(i-36)).clone());}
 			for(int i = 45;i<this.size;i++) {this.inv.setItem(i,emptySlotItem.clone());}
 			this.inv.setItem(this.size-1, rightPageArrow);
