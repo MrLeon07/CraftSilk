@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -110,22 +111,27 @@ public class Events implements Listener{
 					}
 					}}
 			Bukkit.getServer().broadcastMessage("Damage = "+damage+" defans = "+totalDeffence);
-			if(damage < totalDeffence) {
+			if(damage <= totalDeffence) {
 				double chance = Math.random();
-				double value = damage/totalDeffence;
+				double value = damage/(totalDeffence/3);
 				Bukkit.getServer().broadcastMessage("value = "+(int)(value*100)+" chance = "+(int)(chance*100));
 
-				if(chance<value) {
-					e.setDamage(0.5);
+				if(chance*100 <= value*100) {
+					
+					e.setDamage(4);
+					Bukkit.getServer().broadcastMessage(e.getDamage()+" : getDamage");
+					
+					
+					
 				}else {
 					e.setDamage(0);
 				}
 			}
 			else {
-				
+				e.setDamage((int)(damage-totalDeffence));				
 			}
 			
-			
+			Bukkit.getServer().broadcastMessage(e.getFinalDamage()+": Final Damage");
 		}
 	}
 	@EventHandler
@@ -134,6 +140,16 @@ public class Events implements Listener{
 			if(e.getCause().equals(DamageCause.FALL)) {
 				e.setCancelled(true);
 			}
+		}
+	}
+	@EventHandler
+	public void inventoryClose(InventoryCloseEvent e) {
+		Player player = (Player) e.getPlayer();
+		InventoryView inv = e.getView();
+		if(inv.getTitle().equalsIgnoreCase("Alchemy")) {
+			player.getInventory().addItem(e.getInventory().getItem(10));
+			player.getInventory().addItem(e.getInventory().getItem(16));
+			player.getInventory().addItem(e.getInventory().getItem(40));
 		}
 	}
 }
